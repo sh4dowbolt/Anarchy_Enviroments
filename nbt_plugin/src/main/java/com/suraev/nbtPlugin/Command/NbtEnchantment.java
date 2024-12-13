@@ -4,6 +4,7 @@ import com.suraev.nbtPlugin.Command.util.CustomEnchantmentHandler;
 import de.tr7zw.nbtapi.NBT;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import org.apache.commons.lang3.Range;
 import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -25,7 +26,7 @@ public class NbtEnchantment implements CommandExecutor {
             }
             ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
 
-            String inputEnchantment = strings[0];
+            String inputEnchantment = strings[0].toLowerCase();
             if (strings.length == 1) {
                 if (isCustomEnchantment(inputEnchantment)) {
                     if (inputEnchantment.equalsIgnoreCase("unbreakable")) {
@@ -51,35 +52,52 @@ public class NbtEnchantment implements CommandExecutor {
                     player.sendMessage(notLvlCustomEnchantment);
                     return true;
                 }
+                Component notLvlCustomEnchantment = Component.text("Ошибка! Ввели несуществующее зачарование! См. документацию").color(NamedTextColor.DARK_RED);
+                player.sendMessage(notLvlCustomEnchantment);
+                return true;
 
             }
             if (strings.length == 2) {
+                int lvlOfEnchantment;
+                try {
+                    lvlOfEnchantment = Integer.parseInt((strings[1]));
 
-                int lvlOfEnchantment = Integer.parseInt((strings[1]));
-
-                if (isAllowedEnchantment(inputEnchantment)) {
-
-                    NamespacedKey nameForEnchantment = NamespacedKey.fromString("minecraft:" + inputEnchantment);
-                    Enchantment enchantmentSet = Enchantment.getByKey(nameForEnchantment);
-                    NBT.modify(itemInMainHand, nbt -> {
-                        nbt.getOrCreateCompound("Enchantments").setInteger(enchantmentSet.getKey().getKey(), lvlOfEnchantment);
-                    });
-
-                    itemInMainHand.addUnsafeEnchantment(enchantmentSet, lvlOfEnchantment);
-
-                    Component successMessage = Component.text("Успешно добавлено зачарование: ")
-                            .color(NamedTextColor.GREEN)
-                            .append(Component.text(inputEnchantment).color(NamedTextColor.AQUA))
-                            .appendSpace()
-                            .append(Component.text(lvlOfEnchantment).color(NamedTextColor.AQUA))
-                            .appendSpace().append(Component.text("lvl").color(NamedTextColor.AQUA));
-                    player.sendMessage(successMessage);
+                } catch (NumberFormatException exception) {
+                    Component invalidLevelOfEnch = Component.text("Введите уровень зачарования в виде цифр. Символы, буквы игнорируются")
+                            .color(NamedTextColor.DARK_RED);
+                    player.sendMessage(invalidLevelOfEnch);
                     return true;
                 }
-                Component onlyEnchTitle = Component.text("У данного зачарования нету уровня, указывай только название").color(NamedTextColor.DARK_RED);
+
+                    if (isAllowedEnchantment(inputEnchantment)) {
+
+                        Range<Integer> between = Range.between(1, 200);
+
+                        if (between.contains(lvlOfEnchantment)) {
+                        NamespacedKey nameForEnchantment = NamespacedKey.fromString("minecraft:" + inputEnchantment);
+                        Enchantment enchantmentSet = Enchantment.getByKey(nameForEnchantment);
+                        NBT.modify(itemInMainHand, nbt -> {
+                            nbt.getOrCreateCompound("Enchantments").setInteger(enchantmentSet.getKey().getKey(), lvlOfEnchantment);
+                        });
+
+                        itemInMainHand.addUnsafeEnchantment(enchantmentSet, lvlOfEnchantment);
+
+                        Component successMessage = Component.text("Успешно добавлено зачарование: ")
+                                .color(NamedTextColor.GREEN)
+                                .append(Component.text(inputEnchantment).color(NamedTextColor.AQUA))
+                                .appendSpace()
+                                .append(Component.text(lvlOfEnchantment).color(NamedTextColor.AQUA))
+                                .appendSpace().append(Component.text("lvl").color(NamedTextColor.AQUA));
+                        player.sendMessage(successMessage);
+                        return true;
+                    }
+                        Component invalidLvlOfEnch = Component.text("Ошибка! Ввели неправильный уровень для зачарования. Разрешенный диапозон от 1 до 200 уровня").color(NamedTextColor.DARK_RED);
+                        player.sendMessage(invalidLvlOfEnch);
+                        return true;
+                }
+                Component onlyEnchTitle = Component.text("Ошибка! Ввели неправильно наименование зачарование! См. документацию").color(NamedTextColor.DARK_RED);
                 player.sendMessage(onlyEnchTitle);
                 return true;
-
             }
             Component ifNotItemMessage = Component.text("Воспользовать данной командой может только игрок").color(NamedTextColor.DARK_RED);
             player.sendMessage(ifNotItemMessage);

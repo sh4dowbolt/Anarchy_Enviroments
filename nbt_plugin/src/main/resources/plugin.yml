@@ -17,6 +17,10 @@ commands:
   nbt-clear:
     description: очистить прдмет от nbt тегов
     usage: /nbt-clear
+  nbt-desc:
+      description: добавить лор для предмета
+      usage: /nbt-desc
+
 
 
 

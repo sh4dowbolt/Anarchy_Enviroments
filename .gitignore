@@ -1,6 +1,9 @@
 .idea
 cache/
 logs/
+build/
+*jar
+
 
 
 

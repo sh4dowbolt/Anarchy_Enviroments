@@ -1,4 +1,4 @@
-name: discordInform
+name: discord_Inform
 version: '1.0-SNAPSHOT'
 main: com.suraev.discord.discordInform
 api-version: '1.21.1'

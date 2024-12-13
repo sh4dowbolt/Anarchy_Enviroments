@@ -22,8 +22,10 @@ public class NbtClearCommand implements CommandExecutor {
             ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
             ItemMeta itemMeta = itemInMainHand.getItemMeta();
             Material type = itemInMainHand.getType();
-            if(strings.length==0) {
-                if(type!=Material.AIR) {
+
+            if(type!=Material.AIR) {
+
+                if(strings.length==0) {
 
                     NBT.modify(itemInMainHand, nbt -> {
                         nbt.modifyMeta((readableNBT, meta) -> {
@@ -56,13 +58,14 @@ public class NbtClearCommand implements CommandExecutor {
                     player.sendMessage(successMessage);
                     return true;
                 }
-                Component shouldItem = Component.text("В руках должен быть предмет").color(NamedTextColor.DARK_RED);
+                Component shouldItem = Component.text("Команда должна использоваться без аргументов").color(NamedTextColor.DARK_RED);
                 player.sendMessage(shouldItem);
                 return true;
             }
-            Component shouldItem = Component.text("Команда должна использоваться без аргументов").color(NamedTextColor.DARK_RED);
+            Component shouldItem = Component.text("В руках должен быть предмет").color(NamedTextColor.DARK_RED);
             player.sendMessage(shouldItem);
             return true;
+
         }
         return  false;
     }

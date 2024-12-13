@@ -13,7 +13,10 @@ public class DiscordCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if(commandSender instanceof Player player) {
-            Component discordInfo = Component.text("Добро пожаловать на дискорд нашего проекта\nhttps://discord.gg/NdcT9gA7").color(NamedTextColor.GREEN).clickEvent(ClickEvent.openUrl("https://discord.gg/NdcT9gA7"));
+            Component discordInfo = Component.text("Присоединяйся к нашему Discord серверу:").color(NamedTextColor.GRAY)
+                    .appendNewline()
+                    .append(Component.text("https://discord.gg/GJtHtrkM").color(NamedTextColor.DARK_AQUA))
+                    .clickEvent(ClickEvent.openUrl("https://discord.gg/NdcT9gA7"));
             player.sendMessage(discordInfo);
             return true;
         }

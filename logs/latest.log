@@ -1,0 +1,5 @@
+[20:55:21] [ServerMain/INFO]: [bootstrap] Running Java 21 (Java HotSpot(TM) 64-Bit Server VM 21.0.3+7-LTS-152; Oracle Corporation null) on Windows 10 10.0 (amd64)
+[20:55:21] [ServerMain/INFO]: [bootstrap] Loading Purpur 1.21.1-2297-ver/1.21.1@ef12ede (2024-08-22T09:13:58Z) for Minecraft 1.21.1
+[20:55:22] [ServerMain/INFO]: [PluginInitializerManager] Initializing plugins...
+[20:55:22] [ServerMain/INFO]: [PluginInitializerManager] Initialized 0 plugins
+[20:55:28] [ServerMain/INFO]: You need to agree to the EULA in order to run the server. Go to eula.txt for more info.

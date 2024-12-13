@@ -1,0 +1,23 @@
+name: nbt_plugin
+version: '1.0-SNAPSHOT'
+main: com.suraev.nbtPlugin.nbtPlugin
+api-version: '1.21.1'
+
+
+commands:
+  nbt-title:
+    description: добавить nbt предмету наименование
+    usage: /nbt-title <наименование>
+  nbt-counter:
+    description: установить счетчик убийств
+    usage: /nbt-counter <тип убиваемых существ>
+  nbt-ench:
+      description: добавить зачарование
+      usage: /nbt-ench
+  nbt-clear:
+    description: очистить прдмет от nbt тегов
+    usage: /nbt-clear
+
+
+
+

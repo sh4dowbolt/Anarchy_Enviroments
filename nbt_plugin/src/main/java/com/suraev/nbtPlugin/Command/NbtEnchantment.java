@@ -57,7 +57,7 @@ public class NbtEnchantment implements CommandExecutor {
                         player.sendMessage(notLvlCustomEnchantment);
                         return true;
                     }
-                    Component notLvlCustomEnchantment = Component.text("Ошибка! Ввели несуществующее зачарование! См. документацию").color(NamedTextColor.DARK_RED);
+                    Component notLvlCustomEnchantment = Component.text("Ошибка! Вы ввели несуществующее зачарование! См. документацию").color(NamedTextColor.DARK_RED);
                     player.sendMessage(notLvlCustomEnchantment);
                     return true;
 

@@ -21,6 +21,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Spliterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class NbtDesc implements CommandExecutor {
     @Override
@@ -50,18 +52,12 @@ public class NbtDesc implements CommandExecutor {
 
 
 
-                            for (String string : descriptionString.split("\\.",20)) {
+                            for (String string : splitText(descriptionString)) {
                                 TextComponent data = Component.text(string)
                                         .style(Style.style(TextDecoration.ITALIC))
                                         .color(NamedTextColor.GRAY);
                                 lore.addLast(data);
                             }
-
-                    /*        TextComponent textForLore = Component.text(descriptionString)
-                                    .style(Style.style(TextDecoration.ITALIC))
-                                    .color(NamedTextColor.GRAY);
-*/
-
 
                             meta.lore(lore);
                             itemInMainHand.setItemMeta(meta);
@@ -69,7 +65,7 @@ public class NbtDesc implements CommandExecutor {
                         }));
                     });
                     Component success = Component.text("Успешно добавлено описание к предмету: ").color(NamedTextColor.GREEN)
-                            .append(Component.text(descriptionString));
+                            .append(Component.text(descriptionString).color(NamedTextColor.DARK_AQUA));
                     player.sendMessage(success);
                     return true;
                 }
@@ -85,5 +81,18 @@ public class NbtDesc implements CommandExecutor {
         }
 
         return false;
+    }
+
+    private List<String> splitText(String text) {
+        List<String> result = new ArrayList<>();
+        int maxLenght =40;
+        String regex = String.format("(.{1,%d})(\\s+|$)",maxLenght);
+        Pattern pattern =Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(text);
+
+        while(matcher.find()) {
+            result.add(matcher.group(1));
+        }
+        return result;
     }
 }

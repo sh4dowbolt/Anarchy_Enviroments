@@ -20,6 +20,9 @@ commands:
   nbt-desc:
       description: добавить лор для предмета
       usage: /nbt-desc
+  nbt-quality:
+    description: добавить качество
+    usage: /nbt-quality
 
 
 

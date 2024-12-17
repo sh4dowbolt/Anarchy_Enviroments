@@ -33,6 +33,7 @@ public class NbtClearCommand implements CommandExecutor {
                             if(lore!=null) {
                                 lore.clear();
                             }
+
                             meta.lore(lore);
 
                             itemInMainHand.setItemMeta(meta);

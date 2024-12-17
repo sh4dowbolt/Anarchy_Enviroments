@@ -15,8 +15,8 @@ public class DiscordCommand implements CommandExecutor {
         if(commandSender instanceof Player player) {
             Component discordInfo = Component.text("Присоединяйся к нашему Discord серверу:").color(NamedTextColor.GRAY)
                     .appendNewline()
-                    .append(Component.text("https://discord.gg/GJtHtrkM").color(NamedTextColor.DARK_AQUA))
-                    .clickEvent(ClickEvent.openUrl("https://discord.gg/NdcT9gA7"));
+                    .append(Component.text("https://discord.com/invite/6vdAWSFr2B").color(NamedTextColor.DARK_AQUA))
+                    .clickEvent(ClickEvent.openUrl("https://discord.com/invite/6vdAWSFr2B"));
             player.sendMessage(discordInfo);
             return true;
         }

@@ -96,7 +96,7 @@ public class NbtEnchantment implements CommandExecutor {
                             player.sendMessage(successMessage);
                             return true;
                         }
-                        Component invalidLvlOfEnch = Component.text("Ошибка! Ввели неправильный уровень для зачарования. Разрешенный диапозон от 1 до 200 уровня").color(NamedTextColor.DARK_RED);
+                        Component invalidLvlOfEnch = Component.text("Ошибка! Ввели неправильный уровень для зачарования. Разрешенный диапазон от 1 до 200 уровня").color(NamedTextColor.DARK_RED);
                         player.sendMessage(invalidLvlOfEnch);
                         return true;
                     }

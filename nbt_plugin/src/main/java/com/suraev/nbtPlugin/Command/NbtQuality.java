@@ -42,12 +42,12 @@ public class NbtQuality implements CommandExecutor {
                         case "rare" -> Component.text("quality: rare").color(NamedTextColor.BLUE);
                         case "legendary" -> Component.text("quality: legendary").color(NamedTextColor.LIGHT_PURPLE);
                         case "uniq" -> Component.text("quality: uniq").color(NamedTextColor.DARK_RED);
-                        case "chaos" -> Component.text("qu").color(NamedTextColor.BLACK)
-                                .append(Component.text("a").style(Style.style(TextDecoration.OBFUSCATED))).color(NamedTextColor.BLACK)
-                                .append(Component.text("lity: ")).color(NamedTextColor.BLACK)
-                                .append(Component.text("ch")).color(NamedTextColor.BLACK)
-                                .append(Component.text("a").style(Style.style(TextDecoration.OBFUSCATED))).color(NamedTextColor.BLACK)
-                                .append(Component.text("os")).color(NamedTextColor.BLACK);
+                        case "chaos" -> Component.text("qu").color(NamedTextColor.GRAY)
+                                .append(Component.text("a").style(Style.style(TextDecoration.OBFUSCATED))).color(NamedTextColor.GRAY)
+                                .append(Component.text("lity: ")).color(NamedTextColor.GRAY)
+                                .append(Component.text("ch")).color(NamedTextColor.GRAY)
+                                .append(Component.text("a").style(Style.style(TextDecoration.OBFUSCATED))).color(NamedTextColor.GRAY)
+                                .append(Component.text("os")).color(NamedTextColor.GRAY);
                         default -> throw new IllegalStateException("Unexpected value: " + inputQuality.toLowerCase());
                     };
 

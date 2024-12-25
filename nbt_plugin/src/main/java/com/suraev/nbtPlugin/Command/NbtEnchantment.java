@@ -104,13 +104,15 @@ public class NbtEnchantment implements CommandExecutor {
                     player.sendMessage(onlyEnchTitle);
                     return true;
                 }
-                Component airInHand = Component.text("Ошибка! В руках должен быть предмет").color(NamedTextColor.DARK_RED);
-                player.sendMessage(airInHand);
+                Component ifNotItemMessage = Component.text("Ошибка! Обратите внимание на синтаксис команды и количество аргументов." +
+                        " Справочная информация - /help nbt-ench").color(NamedTextColor.DARK_RED);
+                player.sendMessage(ifNotItemMessage);
                 return true;
             }
-            Component ifNotItemMessage = Component.text("Воспользовать данной командой может только игрок").color(NamedTextColor.DARK_RED);
-            player.sendMessage(ifNotItemMessage);
+            Component airInHand = Component.text("Ошибка! В руках должен быть предмет").color(NamedTextColor.DARK_RED);
+            player.sendMessage(airInHand);
             return true;
+
         }
         return false;
     }

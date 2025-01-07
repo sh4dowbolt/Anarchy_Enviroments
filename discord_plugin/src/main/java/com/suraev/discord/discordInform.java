@@ -12,7 +12,7 @@ public final class discordInform extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {System.out.println("Plugin activated");
        getCommand("discord").setExecutor(new DiscordCommand());
-       Bukkit.getScheduler().runTaskTimerAsynchronously(this, new DiscordInformer(),0,36000);
+       Bukkit.getScheduler().runTaskTimerAsynchronously(this, new DiscordInformer(),0,500);
 
        getLogger().info(this.getName()+"has been enabled");
     }

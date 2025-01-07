@@ -6,25 +6,20 @@ api-version: '1.21.1'
 
 commands:
   nbt-title:
-    description: добавить nbt предмету наименование
+    description: Добавить nbt-предмету наименование
     usage: /nbt-title <наименование>
   nbt-counter:
-    description: установить счетчик убийств
+    description: Установить счетчик убийств к nbt-предмету
     usage: /nbt-counter <тип убиваемых существ>
   nbt-ench:
-      description: добавить зачарование
+      description: Добавить зачарование к nbt-предмету
       usage: /nbt-ench
   nbt-clear:
-    description: очистить прдмет от nbt тегов
+    description: Очистить предмет от nbt информации
     usage: /nbt-clear
   nbt-desc:
-      description: добавить лор для предмета
+      description: Добавить описание nbt-предмету
       usage: /nbt-desc
   nbt-quality:
-    description: добавить качество
+    description: Добавить категорию nbt-предмету
     usage: /nbt-quality
-
-
-
-
-

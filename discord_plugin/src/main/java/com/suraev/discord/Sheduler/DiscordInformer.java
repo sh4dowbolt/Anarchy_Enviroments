@@ -5,13 +5,22 @@ import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class DiscordInformer implements Runnable{
 
-    Queue<Component> queueOfMessage;
+    private Queue<Component> queueOfMessage;
 
-   public void prepare() {
+    public DiscordInformer() {
+        queueOfMessage = new ArrayDeque<>();
+        prepare();
+    }
+
+    private void prepare() {
+
        Component shopAndBalance = Component.text("Магазин сервера - ").color(NamedTextColor.DARK_AQUA).append(Component.text("/warp shop").color(NamedTextColor.GOLD))
                .appendNewline()
                .append(Component.text("Проверить баланс - ").color(NamedTextColor.DARK_AQUA)).append(Component.text("/balance").color(NamedTextColor.GOLD));
@@ -55,10 +64,9 @@ public class DiscordInformer implements Runnable{
 
     @Override
     public void run() {
-        if(queueOfMessage.isEmpty()) {
-            prepare();
-        Component getMessage = queueOfMessage.remove();
-        Bukkit.broadcast(getMessage);
+        Component first = queueOfMessage.remove();
+        Bukkit.broadcast(first);
+        queueOfMessage.offer(first);
     }
-    }
+
 }

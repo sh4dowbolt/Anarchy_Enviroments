@@ -1,2 +1,3 @@
 rootProject.name = 'Anarchy Enviroments'
-include 'discord_plugin', 'nbt_plugin'
+include 'discord_plugin', 'nbt_plugin', 'start_kit'
+

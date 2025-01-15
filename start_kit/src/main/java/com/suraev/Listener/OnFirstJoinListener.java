@@ -6,6 +6,8 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
+import org.bukkit.Bukkit;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,8 +21,15 @@ import java.util.List;
 public class OnFirstJoinListener implements Listener {
 
     @EventHandler
-    public void onPLayerDeath(PlayerJoinEvent event) {
+    public void onPlayerJoin(PlayerJoinEvent event) {
 
+        Player player = event.getPlayer();
+        String playerName = player.getName();
+        ConsoleCommandSender consoleSender = Bukkit.getConsoleSender();
+
+        if(!player.hasPlayedBefore()) {
+            Bukkit.dispatchCommand(consoleSender, "kit start"+playerName);
+        }
     }
 
 

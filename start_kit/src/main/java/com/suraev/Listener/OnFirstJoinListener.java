@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OnFirstJoinListener implements Listener {
-    private FileConfiguration fileConfiguration;
+    private final FileConfiguration fileConfiguration;
     public OnFirstJoinListener(FileConfiguration fileConfiguration) {
         this.fileConfiguration = fileConfiguration;
     }

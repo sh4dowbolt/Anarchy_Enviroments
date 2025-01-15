@@ -32,7 +32,7 @@ public class OnFirstJoinListener implements Listener {
         if(!player.hasPlayedBefore()) {
 
             ConsoleCommandSender consoleSender = Bukkit.getConsoleSender();
-            String typeFromConfig = fileConfiguration.getString("setting.type-kit");
+            String typeFromConfig = fileConfiguration.getString("settings.type-kit");
             String playerName = player.getName();
 
             String commandForConsole = "kit " + typeFromConfig + " ";

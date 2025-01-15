@@ -1,0 +1,10 @@
+name: start_kit
+version: '1.0-SNAPSHOT'
+main: com.suraev.StartKit
+api-version: '1.21.1'
+
+
+commands:
+  set_type_kit:
+    description: Установить набор китов для новичков
+    usage: /set_type_kit <наименование>

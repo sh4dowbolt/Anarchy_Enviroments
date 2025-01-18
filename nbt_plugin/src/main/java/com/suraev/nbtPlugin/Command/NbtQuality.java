@@ -48,6 +48,8 @@ public class NbtQuality implements CommandExecutor {
                                 .append(Component.text("ch")).color(NamedTextColor.GRAY)
                                 .append(Component.text("a").style(Style.style(TextDecoration.OBFUSCATED))).color(NamedTextColor.GRAY)
                                 .append(Component.text("os")).color(NamedTextColor.GRAY);
+                        case "currency" -> Component.text("quality: ").color(NamedTextColor.WHITE).append(Component.text("currency").color(NamedTextColor.BLUE));
+                        case "jetton" -> Component.text("quality: ").color(NamedTextColor.WHITE).append(Component.text("jetton").color(NamedTextColor.GOLD));
                         default -> throw new IllegalStateException("Unexpected value: " + inputQuality.toLowerCase());
                     };
 

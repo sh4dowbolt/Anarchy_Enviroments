@@ -40,9 +40,9 @@ public class DiscordInformer implements Runnable{
                .clickEvent(ClickEvent.openUrl("https://hotmc.ru/vote-274393"));
        Component getListOfWarps = Component.text("Получить список варпов - ").color(NamedTextColor.DARK_AQUA).append(Component.text("/warp").color(NamedTextColor.GOLD));
        Component shareSuggestion = Component.text("Есть предложение? ").color(NamedTextColor.DARK_AQUA).append(Component.text("Поделись в /discord").color(NamedTextColor.GOLD));
-       Component alfaTestMessage = Component.text("Сервер находится на стадии альфа тестирования.").color(NamedTextColor.DARK_AQUA)
+       Component alfaTestMessage = Component.text("Сервер находится на стадии бета тестирования.").color(NamedTextColor.DARK_AQUA)
                .appendNewline()
-               .append(Component.text("Приносим изменения за возможные баги").color(NamedTextColor.DARK_AQUA));
+               .append(Component.text("Приносим извинения за возможные баги").color(NamedTextColor.DARK_AQUA));
        Component homeAboutMessage = Component.text("Поставить точку дома - ").color(NamedTextColor.DARK_AQUA).append(Component.text("/sethome").color(NamedTextColor.GOLD))
                .appendNewline()
                .append(Component.text("Попасть домой - ").color(NamedTextColor.DARK_AQUA)).append(Component.text("/home").color(NamedTextColor.GOLD));
@@ -50,6 +50,10 @@ public class DiscordInformer implements Runnable{
                .appendNewline()
                .append(Component.text("https://minecraftrating.ru/vote/283090/").color(NamedTextColor.GOLD))
                .clickEvent(ClickEvent.openUrl("https://minecraftrating.ru/vote/283090/"));
+        Component kitSpin = Component.text("Пиши ").color(NamedTextColor.DARK_AQUA)
+                .appendNewline()
+                .append(Component.text("/kit spin ").color(NamedTextColor.GOLD))
+                .append(Component.text("каждые 4 часа").color(NamedTextColor.DARK_AQUA));
        queueOfMessage.add(shopAndBalance);
        queueOfMessage.add(joinToDiscordServer);
        queueOfMessage.add(infoServer);
@@ -60,6 +64,7 @@ public class DiscordInformer implements Runnable{
        queueOfMessage.add(alfaTestMessage);
        queueOfMessage.add(homeAboutMessage);
        queueOfMessage.add(voteForServerOnMinecraftRating);
+       queueOfMessage.add(kitSpin);
    }
 
     @Override

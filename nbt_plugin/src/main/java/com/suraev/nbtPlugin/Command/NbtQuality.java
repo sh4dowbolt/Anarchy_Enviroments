@@ -38,18 +38,18 @@ public class NbtQuality implements CommandExecutor {
                 if (Quality.isAllowed(inputQuality)) {
 
                     TextComponent textForQuality = switch (inputQuality.toLowerCase()) {
-                        case "uncommon"-> Component.text("Качество: ").color(NamedTextColor.WHITE).append(Component.text("uncommon").color(NamedTextColor.GREEN));
-                        case "rare" -> Component.text("Качество: ").color(NamedTextColor.WHITE).append(Component.text("rare").color(NamedTextColor.BLUE));
-                        case "legendary" -> Component.text("Качество: ").color(NamedTextColor.WHITE).append(Component.text("legendary").color(NamedTextColor.LIGHT_PURPLE));
-                        case "uniq" -> Component.text("Качество: ").color(NamedTextColor.WHITE).append(Component.text("uniq").color(NamedTextColor.DARK_RED));
-                        case "chaos" -> Component.text("Ка").color(NamedTextColor.WHITE)
+                        case "uncommon"-> Component.text("Качество: ").decoration(TextDecoration.ITALIC, false).color(NamedTextColor.WHITE).append(Component.text("uncommon").color(NamedTextColor.GREEN));
+                        case "rare" -> Component.text("Качество: ").decoration(TextDecoration.ITALIC, false).color(NamedTextColor.WHITE).append(Component.text("rare").color(NamedTextColor.BLUE));
+                        case "legendary" -> Component.text("Качество: ").decoration(TextDecoration.ITALIC, false).color(NamedTextColor.WHITE).append(Component.text("legendary").color(NamedTextColor.LIGHT_PURPLE));
+                        case "uniq" -> Component.text("Качество: ").decoration(TextDecoration.ITALIC, false).color(NamedTextColor.WHITE).append(Component.text("uniq").color(NamedTextColor.DARK_RED));
+                        case "chaos" -> Component.text("К").color(NamedTextColor.WHITE).decoration(TextDecoration.ITALIC, false)
                                 .append(Component.text("a").style(Style.style(TextDecoration.OBFUSCATED))).color(NamedTextColor.WHITE)
-                                .append(Component.text("чество: ")).color(NamedTextColor.WHITE)
+                                .append(Component.text("чество: ")).color(NamedTextColor.WHITE).decoration(TextDecoration.ITALIC, false)
                                 .append(Component.text("ch")).color(NamedTextColor.GRAY)
                                 .append(Component.text("a").style(Style.style(TextDecoration.OBFUSCATED))).color(NamedTextColor.GRAY)
                                 .append(Component.text("os")).color(NamedTextColor.GRAY);
-                        case "currency" -> Component.text("Качество: ").color(NamedTextColor.WHITE).append(Component.text("currency").color(NamedTextColor.BLUE));
-                        case "jetton" -> Component.text("Качество: ").color(NamedTextColor.WHITE).append(Component.text("jetton").color(NamedTextColor.GOLD));
+                        case "currency" -> Component.text("Качество: ").decoration(TextDecoration.ITALIC, false).color(NamedTextColor.WHITE).append(Component.text("currency").color(NamedTextColor.BLUE));
+                        case "jetton" -> Component.text("Качество: ").decoration(TextDecoration.ITALIC, false).color(NamedTextColor.WHITE).append(Component.text("jetton").color(NamedTextColor.GOLD));
                         default -> throw new IllegalStateException("Unexpected value: " + inputQuality.toLowerCase());
                     };
 

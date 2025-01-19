@@ -38,18 +38,18 @@ public class NbtQuality implements CommandExecutor {
                 if (Quality.isAllowed(inputQuality)) {
 
                     TextComponent textForQuality = switch (inputQuality.toLowerCase()) {
-                        case "uncommon"-> Component.text("quality: ").color(NamedTextColor.WHITE).append(Component.text("uncommon").color(NamedTextColor.GREEN));
-                        case "rare" -> Component.text("quality: ").color(NamedTextColor.WHITE).append(Component.text("rare").color(NamedTextColor.BLUE));
-                        case "legendary" -> Component.text("quality: ").color(NamedTextColor.WHITE).append(Component.text("legendary").color(NamedTextColor.LIGHT_PURPLE));
-                        case "uniq" -> Component.text("quality: ").color(NamedTextColor.WHITE).append(Component.text("uniq").color(NamedTextColor.DARK_RED));
-                        case "chaos" -> Component.text("qu").color(NamedTextColor.WHITE)
+                        case "uncommon"-> Component.text("Качество: ").color(NamedTextColor.WHITE).append(Component.text("uncommon").color(NamedTextColor.GREEN));
+                        case "rare" -> Component.text("Качество: ").color(NamedTextColor.WHITE).append(Component.text("rare").color(NamedTextColor.BLUE));
+                        case "legendary" -> Component.text("Качество: ").color(NamedTextColor.WHITE).append(Component.text("legendary").color(NamedTextColor.LIGHT_PURPLE));
+                        case "uniq" -> Component.text("Качество: ").color(NamedTextColor.WHITE).append(Component.text("uniq").color(NamedTextColor.DARK_RED));
+                        case "chaos" -> Component.text("Ка").color(NamedTextColor.WHITE)
                                 .append(Component.text("a").style(Style.style(TextDecoration.OBFUSCATED))).color(NamedTextColor.WHITE)
-                                .append(Component.text("lity: ")).color(NamedTextColor.WHITE)
+                                .append(Component.text("чество: ")).color(NamedTextColor.WHITE)
                                 .append(Component.text("ch")).color(NamedTextColor.GRAY)
                                 .append(Component.text("a").style(Style.style(TextDecoration.OBFUSCATED))).color(NamedTextColor.GRAY)
                                 .append(Component.text("os")).color(NamedTextColor.GRAY);
-                        case "currency" -> Component.text("quality: ").color(NamedTextColor.WHITE).append(Component.text("currency").color(NamedTextColor.BLUE));
-                        case "jetton" -> Component.text("quality: ").color(NamedTextColor.WHITE).append(Component.text("jetton").color(NamedTextColor.GOLD));
+                        case "currency" -> Component.text("Качество: ").color(NamedTextColor.WHITE).append(Component.text("currency").color(NamedTextColor.BLUE));
+                        case "jetton" -> Component.text("Качество: ").color(NamedTextColor.WHITE).append(Component.text("jetton").color(NamedTextColor.GOLD));
                         default -> throw new IllegalStateException("Unexpected value: " + inputQuality.toLowerCase());
                     };
 
@@ -74,7 +74,7 @@ public class NbtQuality implements CommandExecutor {
                     return true;
                 }
                 Component shouldItem = Component.text("Ошибка! Указали несуществующее качество. На данный момент доступны:").color(NamedTextColor.DARK_RED)
-                        .appendSpace().append(Component.text("uncommon, rare, legendary, uniq, chaos").color(NamedTextColor.DARK_AQUA));
+                        .appendSpace().append(Component.text("uncommon, rare, legendary, uniq, chaos, currency, jetton").color(NamedTextColor.DARK_AQUA));
                 player.sendMessage(shouldItem);
                 return true;
             }

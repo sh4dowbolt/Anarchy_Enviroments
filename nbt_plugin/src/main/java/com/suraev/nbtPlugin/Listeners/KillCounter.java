@@ -6,6 +6,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
+import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,28 +21,33 @@ public class KillCounter implements Listener {
     @EventHandler
     public void onPLayerDeath(EntityDeathEvent event) {
         if(event.getEntity().getKiller() instanceof Player player) {
+
             ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
             LivingEntity typeOfDeadEntity = event.getEntity();
+            Material type = itemInMainHand.getType();
 
-            if(typeOfDeadEntity instanceof Animals) {
-                NBT.modify(itemInMainHand, nbt -> {
-                    increaseAnimalCounter(player, nbt, itemInMainHand);
-                });
-            }
-            if(typeOfDeadEntity instanceof Enemy) {
-                NBT.modify(itemInMainHand, nbt -> {
-                    increaseMonsterCounter(player, nbt, itemInMainHand);
-                });
-            }
-            if(typeOfDeadEntity instanceof Player) {
-                NBT.modify(itemInMainHand, nbt -> {
-                    increasePlayerCounter(player, nbt, itemInMainHand);
-                });
-            }
-            if(typeOfDeadEntity instanceof EnderDragon) {
-                NBT.modify(itemInMainHand, nbt -> {
-                    increaseDragonCounter(player, nbt, itemInMainHand);
-                });
+            if (type != Material.AIR) {
+
+                if (typeOfDeadEntity instanceof Animals) {
+                    NBT.modify(itemInMainHand, nbt -> {
+                        increaseAnimalCounter(player, nbt, itemInMainHand);
+                    });
+                }
+                if (typeOfDeadEntity instanceof Enemy) {
+                    NBT.modify(itemInMainHand, nbt -> {
+                        increaseMonsterCounter(player, nbt, itemInMainHand);
+                    });
+                }
+                if (typeOfDeadEntity instanceof Player) {
+                    NBT.modify(itemInMainHand, nbt -> {
+                        increasePlayerCounter(player, nbt, itemInMainHand);
+                    });
+                }
+                if (typeOfDeadEntity instanceof EnderDragon) {
+                    NBT.modify(itemInMainHand, nbt -> {
+                        increaseDragonCounter(player, nbt, itemInMainHand);
+                    });
+                }
             }
         }
     }

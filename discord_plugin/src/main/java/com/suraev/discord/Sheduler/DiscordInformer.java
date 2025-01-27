@@ -53,7 +53,7 @@ public class DiscordInformer implements Runnable{
         Component kitSpin = Component.text("Пиши ").color(NamedTextColor.DARK_AQUA)
                 .appendNewline()
                 .append(Component.text("/kit spin ").color(NamedTextColor.GOLD))
-                .append(Component.text("каждые 4 часа").color(NamedTextColor.DARK_AQUA));
+                .append(Component.text("каждый час").color(NamedTextColor.DARK_AQUA));
        queueOfMessage.add(shopAndBalance);
        queueOfMessage.add(joinToDiscordServer);
        queueOfMessage.add(infoServer);

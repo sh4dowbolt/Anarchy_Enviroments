@@ -2,6 +2,7 @@ package com.suraev.discord;
 
 
 import com.suraev.discord.Command.DiscordCommand;
+import com.suraev.discord.Command.VoteCommand;
 import com.suraev.discord.Sheduler.DiscordInformer;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
@@ -12,7 +13,7 @@ public final class discordInform extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {System.out.println("Plugin activated");
        getCommand("discord").setExecutor(new DiscordCommand());
-       getCommand("vote").setExecutor(new DiscordCommand());
+       getCommand("vote").setExecutor(new VoteCommand());
        Bukkit.getScheduler().runTaskTimerAsynchronously(this, new DiscordInformer(),0,12000);
        getLogger().info(this.getName()+"has been enabled");
     }

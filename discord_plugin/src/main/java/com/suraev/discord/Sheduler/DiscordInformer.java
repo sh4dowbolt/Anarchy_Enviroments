@@ -31,9 +31,6 @@ public class DiscordInformer implements Runnable{
                .appendNewline()
                .append(Component.text("https://discord.gg/GJtHtrkM").color(NamedTextColor.GOLD))
                .clickEvent(ClickEvent.openUrl("https://discord.gg/GJtHtrkM"));
-       Component infoServer = prefixForMessage.append(Component.text("Для получения информации о сервере напиши:").color(NamedTextColor.DARK_AQUA))
-               .appendNewline()
-               .append(Component.text("/warp info").color(NamedTextColor.GOLD));
        Component farmMobs = prefixForMessage.append(Component.text("Пофармить мобов можно на:").color(NamedTextColor.DARK_AQUA))
                .appendNewline()
                .append(Component.text("/warp farm").color(NamedTextColor.GOLD));
@@ -41,7 +38,7 @@ public class DiscordInformer implements Runnable{
                .appendNewline()
                .append(Component.text("https://hotmc.ru/vote-274393").color(NamedTextColor.GOLD))
                .clickEvent(ClickEvent.openUrl("https://hotmc.ru/vote-274393"));
-       Component getListOfWarps = prefixForMessage.append(Component.text("Получить список варпов - ").color(NamedTextColor.DARK_AQUA)).append(Component.text("/warp").color(NamedTextColor.GOLD));
+       Component getListOfWarps = prefixForMessage.append(Component.text("Получить список варпов - ").color(NamedTextColor.DARK_AQUA)).append(Component.text("/warps").color(NamedTextColor.GOLD));
        Component shareSuggestion = prefixForMessage.append(Component.text("Есть предложение? ").color(NamedTextColor.DARK_AQUA)).append(Component.text("Поделись в /discord").color(NamedTextColor.GOLD));
        Component alfaTestMessage = prefixForMessage.append(Component.text("Сервер находится на стадии бета тестирования.").color(NamedTextColor.DARK_AQUA))
                .appendNewline()
@@ -54,12 +51,10 @@ public class DiscordInformer implements Runnable{
                .append(Component.text("https://minecraftrating.ru/vote/283090/").color(NamedTextColor.GOLD))
                .clickEvent(ClickEvent.openUrl("https://minecraftrating.ru/vote/283090/"));
         Component kitSpin = prefixForMessage.append(Component.text("Пиши ").color(NamedTextColor.DARK_AQUA))
-                .appendNewline()
                 .append(Component.text("/kit spin ").color(NamedTextColor.GOLD))
                 .append(Component.text("каждый час").color(NamedTextColor.DARK_AQUA));
        queueOfMessage.add(shopAndBalance);
        queueOfMessage.add(joinToDiscordServer);
-       queueOfMessage.add(infoServer);
        queueOfMessage.add(farmMobs);
        queueOfMessage.add(voteForServerOnHotMc);
        queueOfMessage.add(getListOfWarps);

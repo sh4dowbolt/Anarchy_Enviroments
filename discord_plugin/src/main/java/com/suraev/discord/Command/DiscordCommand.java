@@ -19,8 +19,6 @@ public class DiscordCommand implements CommandExecutor {
                     .clickEvent(ClickEvent.openUrl("https://discord.com/invite/6vdAWSFr2B"));
             player.sendMessage(discordInfo);
             return true;
-            
-
         }
         System.out.println("Только игрок может пользоваться данной командой");
         return false;

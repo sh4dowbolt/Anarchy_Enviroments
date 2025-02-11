@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/clans/Anarchy_Enviroments.clans.main.iml" filepath="$PROJECT_DIR$/.idea/modules/clans/Anarchy_Enviroments.clans.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/discord_plugin/Anarchy_Enviroments.discord_plugin.main.iml" filepath="$PROJECT_DIR$/.idea/modules/discord_plugin/Anarchy_Enviroments.discord_plugin.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/nbt_plugin/Anarchy_Enviroments.nbt_plugin.main.iml" filepath="$PROJECT_DIR$/.idea/modules/nbt_plugin/Anarchy_Enviroments.nbt_plugin.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/start_kit/Anarchy_Enviroments.start_kit.main.iml" filepath="$PROJECT_DIR$/.idea/modules/start_kit/Anarchy_Enviroments.start_kit.main.iml" />

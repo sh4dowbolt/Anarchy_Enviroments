@@ -8,3 +8,6 @@ commands:
   discord:
     description: дискорд проекта
     usage: /discord
+  vote:
+    description: проголосовать за сервер
+    usage: /vote

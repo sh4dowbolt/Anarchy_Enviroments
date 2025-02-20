@@ -53,6 +53,9 @@ public class DiscordInformer implements Runnable{
         Component kitSpin = prefixForMessage.append(Component.text("Пиши ").color(NamedTextColor.DARK_AQUA))
                 .append(Component.text("/kit spin ").color(NamedTextColor.GOLD))
                 .append(Component.text("каждый час").color(NamedTextColor.DARK_AQUA));
+        Component dropEgg = prefixForMessage.append(Component.text("Шанс выпадения яйца дракона - ").color(NamedTextColor.DARK_AQUA))
+                .append(Component.text("7%").color(NamedTextColor.GOLD));
+
        queueOfMessage.add(shopAndBalance);
        queueOfMessage.add(joinToDiscordServer);
        queueOfMessage.add(farmMobs);
@@ -63,6 +66,7 @@ public class DiscordInformer implements Runnable{
        queueOfMessage.add(homeAboutMessage);
        queueOfMessage.add(voteForServerOnMinecraftRating);
        queueOfMessage.add(kitSpin);
+       queueOfMessage.add(dropEgg);
    }
 
     @Override

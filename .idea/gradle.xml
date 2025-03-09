@@ -5,10 +5,11 @@
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="21" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/clans" />
+            <option value="$PROJECT_DIR$/clan" />
             <option value="$PROJECT_DIR$/discord_plugin" />
             <option value="$PROJECT_DIR$/nbt_plugin" />
             <option value="$PROJECT_DIR$/start_kit" />

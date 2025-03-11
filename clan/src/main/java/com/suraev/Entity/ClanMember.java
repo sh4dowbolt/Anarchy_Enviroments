@@ -5,4 +5,5 @@ import org.bukkit.entity.Player;
 public class ClanMember {
     Player player;
     Rank rank;
+
 }

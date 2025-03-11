@@ -12,7 +12,7 @@ public class ClanManager {
     public void createClan(Player player, String name) {
 
         if(isPlayerInClan(player)) {
-            throw new RuntimeException("you are already in clan");
+            throw new RuntimeException("you are already in the clan");
         }
 
         if(clans.containsKey(name)) {

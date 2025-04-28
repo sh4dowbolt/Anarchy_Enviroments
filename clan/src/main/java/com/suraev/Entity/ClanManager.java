@@ -2,37 +2,42 @@ package com.suraev.Entity;
 
 import org.bukkit.entity.Player;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
 public class ClanManager {
-    private Map<String, Clan> clans;
 
-    public void createClan(Player player, String name) {
+    private ClanLoader loader;
 
-        if(isPlayerInClan(player)) {
+    public ClanManager(ClanLoader loader) {
+        this.loader = loader;
+    }
+
+
+    public void createClan(Player player,String name) {
+
+        if() {
             throw new RuntimeException("you are already in the clan");
         }
 
-        if(clans.containsKey(name)) {
+        if(!loader.isClanNameExists(name)) {
             throw new RuntimeException("clan existed");
         }
 
-
         Clan clan = new Clan();
-        ClanMember leader= new ClanMember(player);
+        clan.setTitle(name);
+        ClanMember leader= new ClanMember(player, new Rank());
         clan.addMember(leader);
         clan.setClanLeader(leader);
 
-        clans.put(name,clan);
+        loader.insertClanWithTitle(clan);
 
     }
 
-    public boolean isPlayerInClan(Player player) {
+    public boolean isPlayerAlreadyInClan(Player player) {
         return clans.values().stream()
                 .flatMap(clan -> clan.getMembers().stream())
                 .anyMatch(clanMember -> clanMember.getPlayer().equals(player));
+    }
 
-}
+
+
+
 }

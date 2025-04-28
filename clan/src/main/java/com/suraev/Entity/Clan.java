@@ -8,6 +8,14 @@ public class Clan {
     private List<ClanMember> members;
     ClanMember clanLeader;
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public List<ClanMember> getMembers() {
         return members;
     }

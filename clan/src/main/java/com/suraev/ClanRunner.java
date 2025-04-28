@@ -1,5 +1,6 @@
 package com.suraev;
 
+import com.suraev.Command.CreateClan;
 import com.suraev.Entity.ClanManager;
 import com.suraev.Entity.ClanLoader;
 import org.bukkit.event.Listener;
@@ -16,6 +17,8 @@ public class ClanRunner extends JavaPlugin implements Listener {
         loader = new ClanLoader(this);
 
         clanManager= new ClanManager(loader);
+
+        getCommand("create-clan").setExecutor(new CreateClan(clanManager));
 
         loader.loadClans();
         getLogger().info("Finish loading");

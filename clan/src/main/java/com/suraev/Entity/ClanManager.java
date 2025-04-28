@@ -1,5 +1,6 @@
 package com.suraev.Entity;
 
+import com.suraev.Entity.DTO.PlayerDTO;
 import org.bukkit.entity.Player;
 
 public class ClanManager {
@@ -12,32 +13,35 @@ public class ClanManager {
 
 
     public void createClan(Player player,String name) {
+        PlayerDTO playerDTO= new PlayerDTO(player.getName(),player.getUniqueId());
 
-        if() {
+        if(isPlayerAlreadyInClan(playerDTO)) {
             throw new RuntimeException("you are already in the clan");
         }
 
-        if(!loader.isClanNameExists(name)) {
+        if(isClanNameAlreadyExists(name)) {
             throw new RuntimeException("clan existed");
         }
 
         Clan clan = new Clan();
         clan.setTitle(name);
-        ClanMember leader= new ClanMember(player, new Rank());
+        ClanMember leader= new ClanMember(player);
         clan.addMember(leader);
         clan.setClanLeader(leader);
 
-        loader.insertClanWithTitle(clan);
+        insertClanWithTitle(clan);
 
     }
 
-    public boolean isPlayerAlreadyInClan(Player player) {
-        return clans.values().stream()
-                .flatMap(clan -> clan.getMembers().stream())
-                .anyMatch(clanMember -> clanMember.getPlayer().equals(player));
+    private boolean isClanNameAlreadyExists(String name) {
+        return loader.isClanNameExists(name);
     }
 
-
-
+    private boolean isPlayerAlreadyInClan(PlayerDTO player) {
+        return loader.isPlayerInClan(player);
+    }
+    private void insertClanWithTitle(Clan clan) {
+        loader.insertClan(clan);
+    }
 
 }

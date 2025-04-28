@@ -1,5 +1,6 @@
 package com.suraev.Entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Clan {
@@ -21,6 +22,9 @@ public class Clan {
     }
 
     public void addMember(ClanMember player) {
+        if(members == null) {
+            members = new ArrayList<>();
+        }
         members.add(player);
     }
 

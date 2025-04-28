@@ -3,33 +3,38 @@ package com.suraev.Entity;
 import org.bukkit.entity.Player;
 
 import java.util.Objects;
+import java.util.UUID;
 
 
 public class ClanMember {
 
-    private Player player;
-    //private Rank rank;
+    private String name;
+    private UUID uuid;
 
-    public ClanMember(Player player, Rank rank) {
-        this.player = player;
-        //this.rank = rank;
+    public ClanMember(Player player) {
+        this.name = player.getName();
+        this.uuid = player.getUniqueId();
+
     }
 
-    public Player getPlayer() {
-        return player;
+    public String getName() {
+        return name;
     }
 
+    public UUID getUuid() {
+        return uuid;
+    }
 
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         ClanMember that = (ClanMember) object;
-        return Objects.equals(player, that.player);
+        return Objects.equals(name, that.name) && Objects.equals(uuid, that.uuid);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(player);
+        return Objects.hash(name, uuid);
     }
 }

@@ -2,17 +2,18 @@ package com.suraev.Entity;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.suraev.Entity.DTO.PlayerDTO;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
 import java.lang.reflect.Type;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public final class ClanLoader {
 
-    private Map<String, Clan> clans;
-    private Gson gson;
+    private Map<String, Clan> clans = new HashMap<>();
+    private Gson gson = new Gson();
     private File clansFile;
 
 
@@ -20,6 +21,7 @@ public final class ClanLoader {
     public ClanLoader(JavaPlugin plugin) {
         clansFile= new File(plugin.getDataFolder(),"clans.json");
         if(!clansFile.exists()) {
+            plugin.getDataFolder().mkdirs();
             try {
                 clansFile.createNewFile();
             } catch (IOException e) {
@@ -48,7 +50,7 @@ public final class ClanLoader {
         }
     }
 
-    public void insertClanWithTitle(Clan clan) {
+    public void insertClan(Clan clan) {
         clans.put(clan.getTitle(), clan);
     }
 
@@ -56,5 +58,9 @@ public final class ClanLoader {
         return clans.containsKey(name);
     }
 
-    public boolean is
+    public boolean isPlayerInClan(PlayerDTO playerDto) {
+        return clans.values().stream()
+                .flatMap(clan -> clan.getMembers().stream())
+                .anyMatch(clanMember -> clanMember.getUuid().equals(playerDto.uuid()) && clanMember.getName().equals(playerDto.name()));
+    }
 }

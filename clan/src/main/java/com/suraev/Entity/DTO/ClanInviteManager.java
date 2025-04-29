@@ -8,6 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
@@ -20,6 +21,11 @@ public class ClanInviteManager {
 
     public ClanInviteManager(JavaPlugin javaPlugin) {
         this.plugin = javaPlugin;
+    }
+
+    public Optional<InviteClanRequest> getInviteRequest(Player player) {
+        ClanMember clanMember = new ClanMember(player);
+        return Optional.ofNullable(pendingInvites.get(clanMember));
     }
 
     public boolean createInvite(Clan clan, Player inviter, Player targetTo) {
@@ -58,14 +64,14 @@ public class ClanInviteManager {
     }
 
     public boolean acceptInvite(Player player) {
-        PlayerDTO playerDTO = new PlayerDTO(player.getName(), player.getUniqueId());
-        InviteClanRequest invite = pendingInvites.get(playerDTO);
+        ClanMember clanMember = new ClanMember(player);
+        InviteClanRequest invite = pendingInvites.get(clanMember);
 
         if(invite == null || invite.isExpired()) {
             player.sendMessage("Приглашение истекло или не найдено");
         }
 
-        pendingInvites.remove(playerDTO);
+        pendingInvites.remove(clanMember);
         return true;
     }
 

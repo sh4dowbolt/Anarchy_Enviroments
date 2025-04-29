@@ -45,6 +45,7 @@ public class InviteToClan implements CommandExecutor {
 
             if(inviterClan == null) {
                 inviter.sendMessage("Возникли проблемы с кланом, обратитесь к администратору");
+                return true;
             }
 
 
@@ -58,9 +59,14 @@ public class InviteToClan implements CommandExecutor {
             Player targetPlayer = commandSender.getServer().getPlayer(nickName);
             if(targetPlayer == null) {
                 inviter.sendMessage("Игрок "+nickName+" оффлайн или его не существует!");
+                return true;
             }
 
-           clanInviteManager.createInvite(inviterClan,inviter,targetPlayer);
+            if(clanInviteManager.createInvite(inviterClan, inviter, targetPlayer)){
+                inviter.sendMessage("Приглашение отправлено игроку "+targetPlayer.getName());
+                targetPlayer.sendMessage("Вас пригласили в клан "+inviterClan.getTitle()+" Чтобы принять приглашение," +
+                        "используйте команду /clan accept");
+            }
 
         }
             commandSender.sendMessage("Команда доступна только для игроков");

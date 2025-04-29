@@ -58,4 +58,13 @@ public class ClanManager {
 
     }
 
+    public Clan getClanByName(String name) {
+        return loader.findClanByName(name);
+    }
+
+    public void addClanMemberToClan(String name,Player player) {
+        ClanMember clanMember = new ClanMember(player);
+        loader.insertPlayerToClan(name, clanMember);
+    }
+
 }

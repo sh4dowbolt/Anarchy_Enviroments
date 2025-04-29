@@ -1,5 +1,6 @@
 package com.suraev;
 
+import com.suraev.Command.AcceptInviteToClan;
 import com.suraev.Command.CreateClan;
 import com.suraev.Command.InviteToClan;
 import com.suraev.Entity.ClanManager;
@@ -24,6 +25,7 @@ public class ClanRunner extends JavaPlugin implements Listener {
 
         getCommand("сlan create").setExecutor(new CreateClan(clanManager));
         getCommand("clan invite").setExecutor(new InviteToClan(clanInviteManager,clanManager));
+        getCommand("clan accept").setExecutor(new AcceptInviteToClan(clanManager, clanInviteManager));
 
         loader.loadClans();
         getLogger().info("Finish loading");

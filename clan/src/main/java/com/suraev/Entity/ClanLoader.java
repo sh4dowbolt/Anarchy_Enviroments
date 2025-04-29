@@ -67,11 +67,18 @@ public final class ClanLoader {
     public Optional<Clan> findClanByPlayer(ClanMember clanMember) {
         return clans.values().stream()
                 .filter(clan -> clan.isPlayerInClan(clanMember)).findFirst();
+    }
 
+    public Clan findClanByName(String name) {
+        return clans.get(name);
     }
     public boolean isPlayerInClan(ClanMember member) {
         return clans.values().stream()
                 .flatMap(clan -> clan.getMembers().stream())
                 .anyMatch(clanMember -> clanMember.getUuid().equals(member.getUuid()) && clanMember.getName().equals(member.getName()));
+    }
+
+    public void insertPlayerToClan(String name,ClanMember clanMember) {
+       clans.get(name).addMember(clanMember);
     }
 }

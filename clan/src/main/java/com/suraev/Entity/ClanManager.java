@@ -2,6 +2,8 @@ package com.suraev.Entity;
 
 import org.bukkit.entity.Player;
 
+import java.util.Optional;
+
 public class ClanManager {
 
     private ClanLoader loader;
@@ -41,6 +43,19 @@ public class ClanManager {
     }
     private void insertClanWithTitle(Clan clan) {
         loader.insertClan(clan);
+    }
+
+    public boolean isPlayerClanLeader(Player player) {
+        ClanMember clanMember = new ClanMember(player);
+        return loader.isPlayerClanLeader(clanMember);
+    }
+
+    public Clan getClanByPlayer(Player player) {
+        ClanMember clanMember = new ClanMember(player);
+        Optional<Clan> clanByPlayer = loader.findClanByPlayer(clanMember);
+
+        return clanByPlayer.orElse(null);
+
     }
 
 }

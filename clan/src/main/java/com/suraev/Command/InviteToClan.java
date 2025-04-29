@@ -1,12 +1,16 @@
 package com.suraev.Command;
 
+import com.suraev.Entity.Clan;
 import com.suraev.Entity.ClanManager;
+import com.suraev.Entity.ClanMember;
 import com.suraev.Entity.DTO.ClanInviteManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Optional;
 
 public class InviteToClan implements CommandExecutor {
 
@@ -23,8 +27,6 @@ public class InviteToClan implements CommandExecutor {
 
         if(commandSender instanceof Player inviter) {
 
-
-
             if(strings.length<2) {
                 inviter.sendMessage("Использование: /clan invite <nickName>");
                 return true;
@@ -34,6 +36,17 @@ public class InviteToClan implements CommandExecutor {
                 inviter.sendMessage("Указали лишние аргументы, используй: /clan invite <nickName>" );
                 return true;
             }
+
+            if(!clanManager.isPlayerClanLeader(inviter)) {
+                inviter.sendMessage("Прежде чем кого то пригласить, создай клан командой: /clan create <nameOfClan>");
+            }
+
+            Clan inviterClan = clanManager.getClanByPlayer(inviter);
+
+            if(inviterClan == null) {
+                inviter.sendMessage("Возникли проблемы с кланом, обратитесь к администратору");
+            }
+
 
             String subCommand = strings[0];
             if(!subCommand.equalsIgnoreCase("create")) {
@@ -47,7 +60,7 @@ public class InviteToClan implements CommandExecutor {
                 inviter.sendMessage("Игрок "+nickName+" оффлайн или его не существует!");
             }
 
-            clanManager.
+           clanInviteManager.createInvite(inviterClan,inviter,targetPlayer);
 
         }
             commandSender.sendMessage("Команда доступна только для игроков");

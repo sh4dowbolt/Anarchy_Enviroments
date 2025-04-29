@@ -39,5 +39,7 @@ public class Clan {
     public boolean isPlayerClanLeader(ClanMember clanMember) {
         return clanMember.equals(clanLeader);
     }
-
+    public boolean isPlayerInClan(ClanMember clanMember) {
+        return members.contains(clanMember);
+    }
 }

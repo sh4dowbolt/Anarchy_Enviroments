@@ -8,6 +8,7 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public final class ClanLoader {
 
@@ -58,10 +59,15 @@ public final class ClanLoader {
     }
 
 
-    public boolean isPlayerClanLeaderThisClan(String name,ClanMember clanMember) {
-        return clans.entrySet().stream()
-                .filter(x->x.getKey().contains(name))
-                .anyMatch(x-> x.getValue().isPlayerClanLeader(clanMember));
+    public boolean isPlayerClanLeader(ClanMember clanMember) {
+        return clans.values().stream().anyMatch(x->x.isPlayerClanLeader(clanMember));
+
+    }
+
+    public Optional<Clan> findClanByPlayer(ClanMember clanMember) {
+        return clans.values().stream()
+                .filter(clan -> clan.isPlayerInClan(clanMember)).findFirst();
+
     }
     public boolean isPlayerInClan(ClanMember member) {
         return clans.values().stream()

@@ -11,6 +11,7 @@ public class ClanMember {
     private String name;
     private UUID uuid;
 
+
     public ClanMember(Player player) {
         this.name = player.getName();
         this.uuid = player.getUniqueId();

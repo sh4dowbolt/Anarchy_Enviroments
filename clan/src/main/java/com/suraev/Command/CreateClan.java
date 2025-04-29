@@ -20,16 +20,24 @@ public class CreateClan implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (commandSender instanceof Player player) {
 
-            if (strings.length == 1) {
-
-                clanManager.createClan(player,strings[0]);
-                player.sendMessage("The clan has been created");
+            if (strings.length <2) {
+                player.sendMessage("Использование: /clan create <name>");
+                return true;
             }
-            player.sendMessage("Enter the name of a clan");
 
-            return false;
+            String subCommand = strings[0];
+            if(!subCommand.equalsIgnoreCase("create")) {
+                player.sendMessage("Неизвестная подкомада, используй: /clan create <name> ");
+                return true;
+            }
+
+            String titleOfClan= strings[1];
+            clanManager.createClan(player,titleOfClan);
+
+            return true;
         }
-        return false;
+        commandSender.sendMessage("Команда только для игроков");
+        return true;
     }
 }
 

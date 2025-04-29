@@ -1,6 +1,7 @@
 package com.suraev.Entity.DTO;
 
 import com.suraev.Entity.Clan;
+import com.suraev.Entity.ClanMember;
 import com.suraev.Event.InviteClanRequest;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -13,8 +14,8 @@ import java.util.concurrent.TimeUnit;
 
 public class ClanInviteManager {
     private final JavaPlugin plugin;
-    private final Map<PlayerDTO, InviteClanRequest> pendingInvites = new ConcurrentHashMap<>();
-    private final Set<PlayerDTO> cooldownPlayers = ConcurrentHashMap.newKeySet();
+    private final Map<ClanMember, InviteClanRequest> pendingInvites = new ConcurrentHashMap<>();
+    private final Set<ClanMember> cooldownPlayers = ConcurrentHashMap.newKeySet();
     private final int inviteCooldownSeconds=30;
 
     public ClanInviteManager(JavaPlugin javaPlugin) {
@@ -22,8 +23,8 @@ public class ClanInviteManager {
     }
 
     public boolean createInvite(Clan clan, Player inviter, Player targetTo) {
-        PlayerDTO sender = new PlayerDTO(inviter.getName(), inviter.getUniqueId());
-        PlayerDTO target = new PlayerDTO(targetTo.getName(), targetTo.getUniqueId());
+        ClanMember sender = new ClanMember(inviter);
+        ClanMember target = new ClanMember(targetTo);
 
         if(pendingInvites.containsKey(target) && !pendingInvites.get(target).isExpired()) {
             inviter.sendMessage("Игрок уже имеет активное приглашение");

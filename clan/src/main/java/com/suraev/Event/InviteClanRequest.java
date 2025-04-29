@@ -1,17 +1,17 @@
 package com.suraev.Event;
 
-import com.suraev.Entity.DTO.PlayerDTO;
+import com.suraev.Entity.ClanMember;
 
 import java.util.concurrent.TimeUnit;
 
 public class InviteClanRequest {
 
     private final String nameOfClan;
-    private final PlayerDTO sender;
-    private final PlayerDTO target;
+    private final ClanMember sender;
+    private final ClanMember target;
     private final long expiryTime;
 
-    public InviteClanRequest(String nameOfClan, PlayerDTO sender, PlayerDTO target, int duration, TimeUnit unit) {
+    public InviteClanRequest(String nameOfClan, ClanMember sender, ClanMember target, int duration, TimeUnit unit) {
         this.nameOfClan = nameOfClan;
         this.sender = sender;
         this.target = target;
@@ -26,11 +26,11 @@ public class InviteClanRequest {
         return nameOfClan;
     }
 
-    public PlayerDTO getSender() {
+    public ClanMember getSender() {
         return sender;
     }
 
-    public PlayerDTO getTarget() {
+    public ClanMember getTarget() {
         return target;
     }
 

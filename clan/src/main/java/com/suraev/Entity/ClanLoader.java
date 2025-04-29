@@ -2,7 +2,6 @@ package com.suraev.Entity;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
-import com.suraev.Entity.DTO.PlayerDTO;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
@@ -58,9 +57,15 @@ public final class ClanLoader {
         return clans.containsKey(name);
     }
 
-    public boolean isPlayerInClan(PlayerDTO playerDto) {
+
+    public boolean isPlayerClanLeaderThisClan(String name,ClanMember clanMember) {
+        return clans.entrySet().stream()
+                .filter(x->x.getKey().contains(name))
+                .anyMatch(x-> x.getValue().isPlayerClanLeader(clanMember));
+    }
+    public boolean isPlayerInClan(ClanMember member) {
         return clans.values().stream()
                 .flatMap(clan -> clan.getMembers().stream())
-                .anyMatch(clanMember -> clanMember.getUuid().equals(playerDto.uuid()) && clanMember.getName().equals(playerDto.name()));
+                .anyMatch(clanMember -> clanMember.getUuid().equals(member.getUuid()) && clanMember.getName().equals(member.getName()));
     }
 }

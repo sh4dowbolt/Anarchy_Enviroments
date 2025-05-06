@@ -1,19 +1,16 @@
 package com.suraev.discord.Sheduler;
 
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 
 import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class DiscordInformer implements Runnable{
 
-    private Queue<Component> queueOfMessage;
+    private final Queue<Component> queueOfMessage;
 
     public DiscordInformer() {
         queueOfMessage = new ArrayDeque<>();
@@ -21,10 +18,9 @@ public class DiscordInformer implements Runnable{
     }
 
     private void prepare() {
-
         Component prefixForMessage = Component.text("[").color(NamedTextColor.GREEN).append(Component.text("SERVER").color(NamedTextColor.LIGHT_PURPLE)).append(Component.text("]: ").color(NamedTextColor.GREEN));
 
-        Component shopAndBalance = prefixForMessage.append(Component.text("Магазин сервера - ").color(NamedTextColor.DARK_AQUA)).append(Component.text("/warp shop").color(NamedTextColor.GOLD))
+       Component shopAndBalance = prefixForMessage.append(Component.text("Магазин сервера - ").color(NamedTextColor.DARK_AQUA)).append(Component.text("/warp shop").color(NamedTextColor.GOLD))
                .appendNewline()
                .append(Component.text("Проверить баланс - ").color(NamedTextColor.DARK_AQUA)).append(Component.text("/balance").color(NamedTextColor.GOLD));
        Component joinToDiscordServer = prefixForMessage.append(Component.text("Присоединяйся к нашему Discord серверу:").color(NamedTextColor.DARK_AQUA))

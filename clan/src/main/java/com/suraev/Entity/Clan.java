@@ -1,5 +1,6 @@
 package com.suraev.Entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Clan {
@@ -8,17 +9,37 @@ public class Clan {
     private List<ClanMember> members;
     ClanMember clanLeader;
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public List<ClanMember> getMembers() {
+        return members;
+    }
 
     public void addMember(ClanMember player) {
+        if(members == null) {
+            members = new ArrayList<>();
+        }
         members.add(player);
     }
+
     public void removeMember(ClanMember player) {
         members.remove(player);
     }
-    public void changeClanLeader(ClanMember player) {
+
+    public void setClanLeader(ClanMember player) {
         clanLeader=player;
     }
 
-    
-
+    public boolean isPlayerClanLeader(ClanMember clanMember) {
+        return clanMember.equals(clanLeader);
+    }
+    public boolean isPlayerInClan(ClanMember clanMember) {
+        return members.contains(clanMember);
+    }
 }

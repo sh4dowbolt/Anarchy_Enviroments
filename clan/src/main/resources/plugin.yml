@@ -1,0 +1,10 @@
+name: clan-plugin
+version: '1.0-SNAPSHOT'
+main: com.suraev.ClanRunner
+api-version: '1.21.1'
+
+
+commands:
+  create-clan:
+    description: создать клан
+    usage: /create-clan

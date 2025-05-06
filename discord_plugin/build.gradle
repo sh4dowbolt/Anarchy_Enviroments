@@ -1,11 +1,11 @@
-/*plugins {
+plugins {
     id 'java'
-}*/
+}
 
 group = 'com.suraev'
 version = '1.0-SNAPSHOT'
 
-/*repositories {
+repositories {
     mavenCentral()
     maven {
         name = "papermc-repo"
@@ -19,14 +19,14 @@ version = '1.0-SNAPSHOT'
         name = "CodeMC"
         url = uri("https://repo.codemc.io/repository/maven-public/")
     }
-}*/
+}
 
-/*dependencies {
+dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT")
     compileOnly("de.tr7zw:item-nbt-api-plugin:2.13.2")
-}*/
+}
 
-/*def targetJavaVersion = 21
+def targetJavaVersion = 21
 java {
     def javaVersion = JavaVersion.toVersion(targetJavaVersion)
     sourceCompatibility = javaVersion
@@ -51,4 +51,4 @@ processResources {
     filesMatching('paper-plugin.yml') {
         expand props
     }
-}*/
+}

@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
-public class InviteToClan implements CommandExecutor {
+public class InviteClan implements CommandExecutor {
 
     private final ClanInviteManager clanInviteManager;
     private final ClanManager clanManager;
@@ -39,6 +39,7 @@ public class InviteToClan implements CommandExecutor {
 
             if(!clanManager.isPlayerClanLeader(inviter)) {
                 inviter.sendMessage("Прежде чем кого то пригласить, создай клан командой: /clan create <nameOfClan>");
+                return true;
             }
 
             Clan inviterClan = clanManager.getClanByPlayer(inviter);
@@ -50,7 +51,7 @@ public class InviteToClan implements CommandExecutor {
 
 
             String subCommand = strings[0];
-            if(!subCommand.equalsIgnoreCase("create")) {
+            if(!subCommand.equalsIgnoreCase("invite")) {
                 inviter.sendMessage("Неизвестная подкомада, используй: /clan invite <nickName> ");
                 return true;
             }
@@ -65,11 +66,13 @@ public class InviteToClan implements CommandExecutor {
             if(clanInviteManager.createInvite(inviterClan, inviter, targetPlayer)){
                 inviter.sendMessage("Приглашение отправлено игроку "+targetPlayer.getName());
                 targetPlayer.sendMessage("Вас пригласили в клан "+inviterClan.getTitle()+" Чтобы принять приглашение," +
-                        "используйте команду /clan accept");
+                        "используйте команду /clan accept. Для отказа используйте команду /clan cancel");
+                return true;
             }
 
-        }
+        } else {
             commandSender.sendMessage("Команда доступна только для игроков");
         return true;
     }
+    return false;
 }

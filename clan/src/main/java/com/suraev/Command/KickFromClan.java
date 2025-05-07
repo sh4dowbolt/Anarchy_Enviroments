@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import com.suraev.Entity.ClanMember;
 import com.suraev.Entity.Clan;
 
-public class KickClanMemberFromClan implements CommandExecutor{
+public class KickFromClan implements CommandExecutor{
 
     private final ClanManager clanManager;
 
@@ -20,17 +20,14 @@ public class KickClanMemberFromClan implements CommandExecutor{
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player player) {
-            if(args.length == 0) {
-                player.sendMessage("Неверно указана подкоманда: используй /help для получения списка команд");
-                return true;
-            }
-            if(args.length > 2) {
-                player.sendMessage("Указаны лишние аргументы: используй /clan kick <ник>");
+
+            if(args.length != 2) {
+                player.sendMessage("Используй: /clan kick <ник>");
                 return true;
             }
             String subCommand = args[0];
             if(!subCommand.equalsIgnoreCase("kick")) {
-                player.sendMessage("Неверно указана подкоманда: используй /help для получения списка команд");
+                player.sendMessage("Неверно указана подкоманда: используй /clan kick для кика из клана");
                 return true;
             }
             String playerName = args[1];
@@ -57,8 +54,10 @@ public class KickClanMemberFromClan implements CommandExecutor{
             }
 
             if(clan.isPlayerInClan(targetClanMember)) {
-                clanManager.addClanMemberToClan(playerName, player);
+                clanManager.removeClanMemberFromClan(playerName, player);
                 player.sendMessage("Игрок " + playerName + " успешно кикнут из клана"+clan.getTitle());
+                targetPlayer.sendMessage("Вы были кикнуты из клана "+clan.getTitle());
+                return true;
             }
             player.sendMessage("Указанный игрок не состоит в клане");
             return true;

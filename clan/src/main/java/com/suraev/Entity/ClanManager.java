@@ -2,6 +2,8 @@ package com.suraev.Entity;
 
 import org.bukkit.entity.Player;
 
+import com.suraev.Exception.ClanNameAlreadyExistedException;
+import com.suraev.Exception.PlayerAlreadyInClanException;
 import java.util.Optional;
 
 public class ClanManager {
@@ -10,26 +12,27 @@ public class ClanManager {
 
     public ClanManager(ClanLoader loader) {
         this.loader = loader;
-    }
+    }   
 
 
-    public void createClan(Player player,String name) {
+    public void createClan(Player player,String name) throws PlayerAlreadyInClanException, ClanNameAlreadyExistedException {
+
         ClanMember playerDTO= new ClanMember(player);
 
         if(isPlayerAlreadyInClan(playerDTO)) {
-            throw new RuntimeException("you are already in the clan");
+            throw new PlayerAlreadyInClanException("Вы уже находитесь в клане");
         }
 
         if(isClanNameAlreadyExists(name)) {
-            throw new RuntimeException("clan existed");
+            throw new ClanNameAlreadyExistedException("Клан с таким названием уже существует"); 
         }
 
         Clan clan = new Clan();
         clan.setTitle(name);
         ClanMember leader= new ClanMember(player);
+        leader.setRole(Role.LEADER);
         clan.addMember(leader);
-        clan.setClanLeader(leader);
-
+        
         insertClanWithTitle(clan);
 
     }
@@ -41,6 +44,7 @@ public class ClanManager {
     public boolean isPlayerAlreadyInClan(ClanMember player) {
         return loader.isPlayerInClan(player);
     }
+
     private void insertClanWithTitle(Clan clan) {
         loader.insertClan(clan);
     }
@@ -48,6 +52,11 @@ public class ClanManager {
     public boolean isPlayerClanLeader(Player player) {
         ClanMember clanMember = new ClanMember(player);
         return loader.isPlayerClanLeader(clanMember);
+    }
+
+    public boolean isPlayerOfficer(Player player) {
+        ClanMember clanMember = new ClanMember(player);
+        return loader.isPlayerOfficer(clanMember);
     }
 
     public Clan getClanByPlayer(Player player) {
@@ -62,9 +71,25 @@ public class ClanManager {
         return loader.findClanByName(name);
     }
 
-    public void addClanMemberToClan(String name,Player player) {
+    public boolean addClanMemberToClan(String name,Player player) {
         ClanMember clanMember = new ClanMember(player);
         loader.insertPlayerToClan(name, clanMember);
+        return true;
+    }
+    
+    public boolean removeClanMemberFromClan(String clanName,Player player) {
+        ClanMember clanMember = new ClanMember(player);
+        loader.removePlayerFromClan(clanName, clanMember);
+        return true;
     }
 
+    public boolean removeClan(Player player) {
+        ClanMember clanMember = new ClanMember(player);
+        Optional<Clan> clan = loader.findClanByPlayer(clanMember);
+        if(clan.isPresent()) {
+            loader.removeClan(clan.get().getTitle());
+            return true;
+        }
+        return false;
+    }
 }

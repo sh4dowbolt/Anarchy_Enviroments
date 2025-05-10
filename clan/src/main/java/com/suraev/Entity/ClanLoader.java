@@ -60,8 +60,11 @@ public final class ClanLoader {
 
 
     public boolean isPlayerClanLeader(ClanMember clanMember) {
-        return clans.values().stream().anyMatch(x->x.isPlayerClanLeader(clanMember));
+        return clans.values().stream().anyMatch(clan -> clan.isPlayerClanLeader(clanMember));
+    }
 
+    public boolean isPlayerOfficer(ClanMember clanMember) {
+        return clans.values().stream().anyMatch(clan -> clan.isPlayerOfficer(clanMember));
     }
 
     public Optional<Clan> findClanByPlayer(ClanMember clanMember) {
@@ -80,5 +83,13 @@ public final class ClanLoader {
 
     public void insertPlayerToClan(String name,ClanMember clanMember) {
        clans.get(name).addMember(clanMember);
+    }
+
+    public void removePlayerFromClan(String name,ClanMember clanMember) {
+       clans.get(name).removeMember(clanMember);
+    }
+
+    public void removeClan(String clanName) {
+       clans.remove(clanName);
     }
 }

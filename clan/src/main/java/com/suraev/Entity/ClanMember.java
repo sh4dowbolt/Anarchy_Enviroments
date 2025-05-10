@@ -10,12 +10,13 @@ public class ClanMember {
 
     private String name;
     private UUID uuid;
+    private Role role;
 
-
+  
     public ClanMember(Player player) {
         this.name = player.getName();
         this.uuid = player.getUniqueId();
-
+        this.role = Role.MEMBER;
     }
 
     public String getName() {
@@ -25,6 +26,15 @@ public class ClanMember {
     public UUID getUuid() {
         return uuid;
     }
+    
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
 
     @Override
     public boolean equals(Object object) {

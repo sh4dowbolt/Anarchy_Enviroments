@@ -32,13 +32,14 @@ public class ClanInviteManager {
         ClanMember sender = new ClanMember(inviter);
         ClanMember target = new ClanMember(targetTo);
 
-        if(pendingInvites.containsKey(target) && !pendingInvites.get(target).isExpired()) {
+        boolean inviteIsExpired = pendingInvites.get(target).isExpired();
+        if(pendingInvites.containsKey(target) && !inviteIsExpired) {
             inviter.sendMessage("Игрок уже имеет активное приглашение");
             return false;
         }
 
         if(cooldownPlayers.contains(target)) {
-            inviter.sendMessage("Нельзя спамить так много) чил");
+            inviter.sendMessage("Вы не можете приглашать игроков слишком часто");
             return false;
         }
 
@@ -63,12 +64,13 @@ public class ClanInviteManager {
         return  true;
     }
 
-    public boolean acceptInvite(Player player) {
+    public boolean removeInvite(Player player) {
         ClanMember clanMember = new ClanMember(player);
         InviteClanRequest invite = pendingInvites.get(clanMember);
 
         if(invite == null || invite.isExpired()) {
             player.sendMessage("Приглашение истекло или не найдено");
+            return false;
         }
 
         pendingInvites.remove(clanMember);

@@ -1,16 +1,20 @@
 package com.suraev.Entity;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.List; 
 
 public class Clan {
     private String title;
     private String description;
     private List<ClanMember> members;
-    ClanMember clanLeader;
+
 
     public String getTitle() {
         return title;
+    }
+    
+    public ClanMember getOwner() {
+        return members.stream().filter(clanMember -> clanMember.getRole() == Role.LEADER).findFirst().orElse(null);
     }
 
     public void setTitle(String title) {
@@ -32,13 +36,16 @@ public class Clan {
         members.remove(player);
     }
 
-    public void setClanLeader(ClanMember player) {
-        clanLeader=player;
+    public boolean isPlayerClanLeader(ClanMember checkedClanMember) {
+        return members.stream().filter(clanMember -> clanMember.getRole() == Role.LEADER)
+        .anyMatch(clanMember -> clanMember.equals(checkedClanMember));
     }
 
-    public boolean isPlayerClanLeader(ClanMember clanMember) {
-        return clanMember.equals(clanLeader);
+    public boolean isPlayerOfficer(ClanMember checkedClanMember) {
+        return members.stream().filter(clanMember -> clanMember.getRole() == Role.OFFICER)
+        .anyMatch(clanMember -> clanMember.equals(checkedClanMember));
     }
+
     public boolean isPlayerInClan(ClanMember clanMember) {
         return members.contains(clanMember);
     }

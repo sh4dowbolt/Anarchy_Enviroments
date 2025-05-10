@@ -13,7 +13,7 @@ public class KickFromClan implements CommandExecutor{
 
     private final ClanManager clanManager;
 
-    public KickClanMemberFromClan(ClanManager clanManager) {
+    public KickFromClan(ClanManager clanManager) {
         this.clanManager = clanManager;
     }
 

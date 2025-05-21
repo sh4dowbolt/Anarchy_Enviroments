@@ -51,11 +51,11 @@ public final class ClanLoader {
     }
 
     public void insertClan(Clan clan) {
-        clans.put(clan.getTitle(), clan);
+        clans.put(clan.getId(), clan);
     }
 
     public boolean isClanNameExists(String name) {
-        return clans.containsKey(name);
+        return clans.values().stream().anyMatch(clan -> clan.getTitle().equals(name));
     }
 
 
@@ -72,8 +72,8 @@ public final class ClanLoader {
                 .filter(clan -> clan.isPlayerInClan(clanMember)).findFirst();
     }
 
-    public Clan findClanByName(String name) {
-        return clans.get(name);
+    public Optional<Clan> findClanByName(String name) {
+        return clans.values().stream().filter(clan -> clan.getTitle().equals(name)).findFirst();
     }
     public boolean isPlayerInClan(ClanMember member) {
         return clans.values().stream()
@@ -82,14 +82,17 @@ public final class ClanLoader {
     }
 
     public void insertPlayerToClan(String name,ClanMember clanMember) {
-       clans.get(name).addMember(clanMember);
+        clans.values().stream().filter(clan -> clan.getTitle().equals(name)).findFirst()
+        .ifPresent(clan -> clan.addMember(clanMember));
     }
 
     public void removePlayerFromClan(String name,ClanMember clanMember) {
-       clans.get(name).removeMember(clanMember);
+        clans.values().stream().filter(clan -> clan.getTitle().equals(name)).findFirst()
+        .ifPresent(clan -> clan.removeMember(clanMember));
     }
 
     public void removeClan(String clanName) {
-       clans.remove(clanName);
+       clans.values().stream().filter(clan -> clan.getTitle().equals(clanName))
+       .findFirst().ifPresent(clan -> clans.remove(clan.getId()));
     }
 }

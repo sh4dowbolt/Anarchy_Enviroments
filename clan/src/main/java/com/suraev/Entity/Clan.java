@@ -2,8 +2,15 @@ package com.suraev.Entity;
 
 import java.util.ArrayList;
 import java.util.List; 
+import lombok.Getter;
+import lombok.Setter;
 
+
+@Getter
+@Setter
 public class Clan {
+    
+    private Long id;
     private String title;
     private String description;
     private List<ClanMember> members;

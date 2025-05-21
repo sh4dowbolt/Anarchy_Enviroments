@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import com.suraev.Exception.ClanNameAlreadyExistedException;
 import com.suraev.Exception.PlayerAlreadyInClanException;
 import java.util.Optional;
+import java.util.UUID;
 
 public class ClanManager {
 
@@ -28,6 +29,7 @@ public class ClanManager {
         }
 
         Clan clan = new Clan();
+        clan.setId(generateUniqueId());
         clan.setTitle(name);
         ClanMember leader= new ClanMember(player);
         leader.setRole(Role.LEADER);
@@ -91,5 +93,9 @@ public class ClanManager {
             return true;
         }
         return false;
+    }
+
+    public String generateUniqueId() {
+        return UUID.randomUUID().toString();
     }
 }

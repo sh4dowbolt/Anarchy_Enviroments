@@ -14,6 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 public class ClanInviteManager {
+    
     private final JavaPlugin plugin;
     private final Map<ClanMember, InviteClanRequest> pendingInvites = new ConcurrentHashMap<>();
     private final Set<ClanMember> cooldownPlayers = ConcurrentHashMap.newKeySet();

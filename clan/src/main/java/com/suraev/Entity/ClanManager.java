@@ -10,9 +10,12 @@ import java.util.UUID;
 public class ClanManager {
 
     private ClanLoader loader;
+    private Map<String,Clan> clans;
 
     public ClanManager(ClanLoader loader) {
         this.loader = loader;
+
+        this.clans = new ConcurrentHashMap<>(loader.getClans());
     }   
 
 

@@ -1,21 +1,5 @@
 package com.suraev;
 
-<<<<<<< HEAD
-import com.suraev.Entity.Clan;
-import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-public class ClanRunner extends JavaPlugin {
-
-    @Override
-    public void onEnable() {
-       Map<String, List<Clan>> clans = new HashMap<>();
-    }
-}
-=======
 import com.suraev.Command.AcceptInviteToClan;
 import com.suraev.Command.CreateClan;
 import com.suraev.Command.InviteToClan;
@@ -42,6 +26,9 @@ public class ClanRunner extends JavaPlugin implements Listener {
         getCommand("сlan create").setExecutor(new CreateClan(clanManager));
         getCommand("clan invite").setExecutor(new InviteToClan(clanInviteManager,clanManager));
         getCommand("clan accept").setExecutor(new AcceptInviteToClan(clanManager, clanInviteManager));
+        getCommand("clan kick").setExecutor(new KickFromClan(clanManager));
+        getCommand("clan leave").setExecutor(new LeaveClan(clanManager));
+    
 
         loader.loadClans();
         getLogger().info("Finish loading");
@@ -54,4 +41,3 @@ public class ClanRunner extends JavaPlugin implements Listener {
         getLogger().info("The all of the clans have been saved");
     }
 }
->>>>>>> refs/remotes/origin/main

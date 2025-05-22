@@ -43,56 +43,56 @@ public class ClanManager {
     }
 
     private boolean isClanNameAlreadyExists(String name) {
-        return loader.isClanNameExists(name);
+        return clans.values().stream().anyMatch(clan -> clan.getTitle().equals(name));
     }
 
     public boolean isPlayerAlreadyInClan(ClanMember player) {
-        return loader.isPlayerInClan(player);
+        return clans.values().stream().anyMatch(clan -> clan.isPlayerInClan(player));
     }
 
     private void insertClanWithTitle(Clan clan) {
-        loader.insertClan(clan);
+        clans.put(clan.getId(), clan);
     }
 
     public boolean isPlayerClanLeader(Player player) {
         ClanMember clanMember = new ClanMember(player);
-        return loader.isPlayerClanLeader(clanMember);
+        return clans.values().stream().anyMatch(clan -> clan.isPlayerClanLeader(clanMember));
     }
 
     public boolean isPlayerOfficer(Player player) {
         ClanMember clanMember = new ClanMember(player);
-        return loader.isPlayerOfficer(clanMember);
+        return clans.values().stream().anyMatch(clan -> clan.isPlayerOfficer(clanMember));
     }
 
     public Clan getClanByPlayer(Player player) {
         ClanMember clanMember = new ClanMember(player);
-        Optional<Clan> clanByPlayer = loader.findClanByPlayer(clanMember);
+        Optional<Clan> clanByPlayer = clans.values().stream().filter(clan -> clan.isPlayerInClan(clanMember)).findFirst();
 
         return clanByPlayer.orElse(null);
 
     }
 
-    public Clan getClanByName(String name) {
-        return loader.findClanByName(name);
+    public Optional<Clan> getClanByName(String name) {
+        return clans.values().stream().filter(clan -> clan.getTitle().equals(name)).findFirst();
     }
 
     public boolean addClanMemberToClan(String name,Player player) {
         ClanMember clanMember = new ClanMember(player);
-        loader.insertPlayerToClan(name, clanMember);
+        clans.values().stream().filter(clan -> clan.getTitle().equals(name)).findFirst().ifPresent(clan -> clan.addMember(clanMember));
         return true;
     }
     
     public boolean removeClanMemberFromClan(String clanName,Player player) {
         ClanMember clanMember = new ClanMember(player);
-        loader.removePlayerFromClan(clanName, clanMember);
+        clans.values().stream().filter(clan -> clan.getTitle().equals(clanName)).findFirst().ifPresent(clan -> clan.removeMember(clanMember));
         return true;
     }
 
     public boolean removeClan(Player player) {
         ClanMember clanMember = new ClanMember(player);
-        Optional<Clan> clan = loader.findClanByPlayer(clanMember);
+        Optional<Clan> clan = clans.values().stream().filter(clan -> clan.isPlayerInClan(clanMember)).findFirst();
         if(clan.isPresent()) {
-            loader.removeClan(clan.get().getTitle());
+            clans.remove(clan.get().getId());
             return true;
         }
         return false;

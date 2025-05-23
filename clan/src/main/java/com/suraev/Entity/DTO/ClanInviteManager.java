@@ -31,7 +31,7 @@ public class ClanInviteManager {
 
     public boolean createInvite(Clan clan, Player inviter, Player targetTo) {
         ClanMember sender = new ClanMember(inviter);
-        
+
         ClanMember target = new ClanMember(targetTo);
        
 
@@ -71,7 +71,7 @@ public class ClanInviteManager {
         InviteClanRequest invite = pendingInvites.get(clanMember);
 
         if(invite == null || requestIsExpired(invite)) {
-            player.sendMessage("Приглашение истекло или не найдено");
+            player.sendMessage("Приглашение истекло или его не существует");
             return false;
         }
 

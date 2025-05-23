@@ -30,11 +30,14 @@ public class DisbandClan implements CommandExecutor {
             if(optionalClan.isPresent()) {
                 clanManager.removeClan(player);
                 player.sendMessage("Клан успешно распущен");
+                return true;
             }else{
                 player.sendMessage("У вас нет клана");
+                return true;
             }
            }else{
             player.sendMessage("У вас нет прав на распуск клана");
+            return true;
            }
         }
         return false;

@@ -14,14 +14,17 @@ commands:
       /clan cancel - отменить приглашение
       /clan kick <name> - кикнуть из клана
       /clan leave - покинуть клан
-      /clan remove - удалить клан, лидером которого вы являетесь
       /clan info - информация о клане
       /clan members - информация о участниках клана
       /clan disband - распустить клан
-
+  clan remove:
+    description: удалить клан
+    usage: |
+      /clan remove - удалить клан
 permissions:
   clan.remove:
     description: разрешение на удаление клана
     default: op
+
 
 

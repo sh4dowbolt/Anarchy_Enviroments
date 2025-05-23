@@ -32,7 +32,7 @@ public class LeaveClan implements CommandExecutor {
                     player.sendMessage("Вы не можете покинуть клан, пока являетесь лидером");
                     return true;
                 }
-                clanManager.removeClanMemberFromClan(player.getName(), player);
+                clanManager.removeClanMemberFromClan(clan.getTitle(), player);
                 player.sendMessage("Вы покинули клан "+clan.getTitle());
                 return true;
             }

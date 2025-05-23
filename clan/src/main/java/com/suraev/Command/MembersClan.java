@@ -15,6 +15,7 @@ import com.suraev.Entity.Clan;
 import java.util.List;
 import java.util.ArrayList;
 import com.suraev.Entity.DTO.ClanMemberInfo;
+import net.kyori.adventure.text.Component;
 
 public class MembersClan implements CommandExecutor {
     private final ClanManager clanManager;
@@ -39,43 +40,31 @@ public class MembersClan implements CommandExecutor {
                     return true;
                 }
                 Clan clan = optionalClan.get();
-                clan.getMembers().stream().map(member -> {
-                    ClanMemberInfo info = new ClanMemberInfo();
-                    info.setName(member.getName());
-                    info.setRole(member.getRole().toString());
-                    info.setOnlineStatus(member.isOnline() ? "Онлайн" : "Офлайн");
-                    return info;
+
+                List<Component> leaders = clan.getMembers().stream().filter(member -> member.getRole().equals(Role.LEADER)).map(member -> {
+                    return member.toStringComponent();
+                }).collect(Collectors.toList());
+                List<Component> officers = clan.getMembers().stream().filter(member -> member.getRole().equals(Role.OFFICER)).map(member -> {
+                    return member.toStringComponent();
+                }).collect(Collectors.toList());
+                List<Component> members = clan.getMembers().stream().filter(member -> member.getRole().equals(Role.MEMBER)).map(member -> {
+                    return member.toStringComponent();
                 }).collect(Collectors.toList());
                 
-                StringBuilder message = new StringBuilder();
-                message.append("Лидер клана: ");
-                message.append(clan.getMembers().stream().filter(member -> member.getRole().equals(Role.LEADER)).map(clanMember -> {
-                    ClanMemberInfo info = new ClanMemberInfo();
-                    info.setName(clanMember.getName());
-                    info.setRole(clanMember.getRole().toString());
-                    info.setOnlineStatus(clanMember.isOnline() ? "Онлайн" : "Офлайн");
-                    return info.toString();
-                }).collect(Collectors.joining(", ")));
-                message.append("\n");
-                message.append("Офицеры клана: ");
-                message.append(clan.getMembers().stream().filter(member -> member.getRole().equals(Role.OFFICER)).map(clanMember -> {
-                    ClanMemberInfo info = new ClanMemberInfo();
-                    info.setName(clanMember.getName());
-                    info.setRole(clanMember.getRole().toString());
-                    info.setOnlineStatus(clanMember.isOnline() ? "Онлайн" : "Офлайн");
-                    return info.toString();
-                }).collect(Collectors.joining(", ")));
-                message.append("\n");
-                message.append("Участники клана: ");
-                message.append(clan.getMembers().stream().filter(member -> member.getRole().equals(Role.MEMBER)).map(clanMember -> {
-                    ClanMemberInfo info = new ClanMemberInfo();
-                    info.setName(clanMember.getName());
-                    info.setRole(clanMember.getRole().toString());
-                    info.setOnlineStatus(clanMember.isOnline() ? "Онлайн" : "Офлайн");
-                    return info.toString();
-                }).collect(Collectors.joining(", ")));
-        
-                player.sendMessage(message.toString());
+                
+                
+                Component leadersMessage = buildRoleMessage("Лидер клана: ", leaders);
+                Component officersMessage = buildRoleMessage("Офицеры клана: ", officers);
+                Component membersMessage = buildRoleMessage("Участники клана: ", members);
+
+
+                Component message = leadersMessage
+                .append(Component.newline())
+                .append(officersMessage)
+                .append(Component.newline())
+                .append(membersMessage);
+
+                player.sendMessage(message);
                 return true;
             }
         }
@@ -84,4 +73,22 @@ public class MembersClan implements CommandExecutor {
 
      
     }
+
+    private Component buildRoleMessage(String prefix, List<Component> components) {
+        Component message = Component.text(prefix);
+
+        if(components.isEmpty()) {
+            message = message.append(Component.text("Отсутствуют"));
+            return message;
+        }
+
+        for(Component component : components) {
+            message = message.append(component);
+            if(components.indexOf(component) != components.size() - 1) {
+                message = message.append(Component.text(", "));
+            }
+        }
+        return message;
+    }
+
 }

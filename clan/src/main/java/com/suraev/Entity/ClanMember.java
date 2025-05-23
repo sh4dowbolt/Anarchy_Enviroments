@@ -4,9 +4,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.Bukkit;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.Objects;
 import java.util.UUID;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 
 @Getter
 @Setter
@@ -44,5 +45,17 @@ public class ClanMember {
 
     public boolean isOnline() {
         return Bukkit.getPlayer(uuid) != null;
+    }
+
+    public  Component toStringComponent() {
+        Component component;
+        if(isOnline()) {
+            component = Component.text(name)
+            .append(Component.text(" - " + "Онлайн").color(NamedTextColor.GREEN));
+        } else {
+            component = Component.text(name)
+            .append(Component.text(" - " + "Офлайн").color(NamedTextColor.RED));
+        }
+        return component;
     }
 }

@@ -32,7 +32,13 @@ public class InviteCancel implements CommandExecutor {
             }
             if(args[0].equalsIgnoreCase("cancel")) {
                 clanInviteManager.removeInvite(player);
+                player.sendMessage("Приглашение отменено");
+                return true;
+            }else{
+                player.sendMessage("У вас нет приглашения в клан");
+                return true;
             }
+
         }
         return false;
     }

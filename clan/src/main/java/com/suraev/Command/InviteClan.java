@@ -42,9 +42,9 @@ public class InviteClan implements CommandExecutor {
                 return true;
             }
 
-            Clan clanToInvite = clanManager.getClanByPlayer(inviter);
+            Optional<Clan> clanToInvite = clanManager.getClanByPlayer(inviter);
 
-            if(clanToInvite == null) {
+            if(clanToInvite.isEmpty()) {
                 inviter.sendMessage("Возникли проблемы с кланом, обратитесь к администратору");
                 return true;
             }
@@ -62,9 +62,9 @@ public class InviteClan implements CommandExecutor {
                 return true;
             }
 
-            if(clanInviteManager.createInvite(clanToInvite, inviter, targetPlayer)){
+            if(clanInviteManager.createInvite(clanToInvite.get(), inviter, targetPlayer)){
                 inviter.sendMessage("Приглашение отправлено игроку "+targetPlayer.getName());
-                targetPlayer.sendMessage("Вас пригласили в клан "+clanToInvite.getTitle()+" Чтобы принять приглашение," +
+                targetPlayer.sendMessage("Вас пригласили в клан "+clanToInvite.get().getTitle()+" Чтобы принять приглашение," +
                         "используйте команду /clan accept. Для отказа используйте команду /clan cancel");
                 return true;
             }

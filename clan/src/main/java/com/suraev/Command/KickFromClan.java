@@ -8,6 +8,7 @@ import com.suraev.Entity.ClanManager;
 import org.bukkit.entity.Player;
 import com.suraev.Entity.ClanMember;
 import com.suraev.Entity.Clan;
+import java.util.Optional;
 
 public class KickFromClan implements CommandExecutor{
 
@@ -36,11 +37,13 @@ public class KickFromClan implements CommandExecutor{
                 player.sendMessage("Игрок " + playerName + " не найден");
                 return true;
             }
-            Clan clan = clanManager.getClanByPlayer(player);
-            if(clan == null) {
+            Optional<Clan> optionalClan = clanManager.getClanByPlayer(player);
+            if(optionalClan.isEmpty()) {
                 player.sendMessage("Вы не состоите в клане");
                 return true;
             }
+            
+            Clan clan = optionalClan.get();
 
             ClanMember targetClanMember = new ClanMember(targetPlayer);
             ClanMember currentClanMember = new ClanMember(player);

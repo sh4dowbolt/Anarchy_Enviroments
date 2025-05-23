@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import com.suraev.Entity.ClanManager; 
 import com.suraev.Entity.Clan;
 import com.suraev.Entity.ClanMember;
+import java.util.Optional;
 
 public class LeaveClan implements CommandExecutor {
 
@@ -20,11 +21,12 @@ public class LeaveClan implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
             if(sender instanceof Player player) {
-                Clan clan = clanManager.getClanByPlayer(player);
-                if(clan == null) {
+                Optional<Clan> optionalClan = clanManager.getClanByPlayer(player);
+                if(optionalClan.isEmpty()) {
                     player.sendMessage("Вы не состоите в клане");
                     return true;
                 }
+                Clan clan = optionalClan.get();
                 ClanMember clanMember = new ClanMember(player);
                 if(clan.isPlayerClanLeader(clanMember)) {
                     player.sendMessage("Вы не можете покинуть клан, пока являетесь лидером");

@@ -9,7 +9,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map;
 import com.suraev.Entity.Clan;
-
+import com.suraev.Entity.ClanMember;
 
 public class ClanManager {
 
@@ -24,6 +24,8 @@ public class ClanManager {
     
 
     public void createClan(Player player,String name) throws PlayerAlreadyInClanException, ClanNameAlreadyExistedException {
+
+       if(validateClanName(name)) {
 
         ClanMember playerDTO= new ClanMember(player);
 
@@ -44,7 +46,12 @@ public class ClanManager {
         clan.addMember(leader);
 
         insertClanWithTitle(clan);
+    } else {
+        player.sendMessage("Название клана должно быть от 3 до 10 символов");
+    }
 
+    private boolean validateClanName(String name) {
+        return name.length() >= 3 && name.length() <= 10;
     }
 
     private boolean isClanNameAlreadyExists(String name) {
@@ -69,12 +76,9 @@ public class ClanManager {
         return clans.values().stream().anyMatch(clan -> clan.isPlayerOfficer(clanMember));
     }
 
-    public Clan getClanByPlayer(Player player) {
+    public Optional<Clan> getClanByPlayer(Player player) {
         ClanMember clanMember = new ClanMember(player);
-        Optional<Clan> clanByPlayer = clans.values().stream().filter(clan -> clan.isPlayerInClan(clanMember)).findFirst();
-
-        return clanByPlayer.orElse(null);
-
+        return clans.values().stream().filter(clan -> clan.isPlayerInClan(clanMember)).findFirst();
     }
 
     public Optional<Clan> getClanByName(String name) {
@@ -102,8 +106,11 @@ public class ClanManager {
         }
         return false;
     }
-
     public UUID generateUniqueId() {
         return UUID.randomUUID();
+    }
+
+    public void saveClans() {
+        loader.saveClans(clans);
     }
 }

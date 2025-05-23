@@ -37,6 +37,7 @@ public class CreateClan implements CommandExecutor {
             String titleOfClan= strings[1];
             try {
                 clanManager.createClan(player,titleOfClan);
+                player.sendMessage("Клан успешно создан: "+titleOfClan);
             } catch (PlayerAlreadyInClanException  e) {
                 player.sendMessage(e.getMessage());
             } catch (ClanNameAlreadyExistedException e) {

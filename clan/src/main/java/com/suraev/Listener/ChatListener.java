@@ -6,6 +6,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import com.suraev.Entity.ClanManager;
 import org.bukkit.entity.Player;
 import com.suraev.Entity.Clan;
+import java.util.Optional;
 
 public class ChatListener implements Listener {
 
@@ -18,9 +19,9 @@ public class ChatListener implements Listener {
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
-        Clan clan = clanManager.getClanByPlayer(player);
-        if(clan != null) {
-            event.setFormat(clan.getTitle() + " §7: §f" + player.getName() + " §7: §f" + event.getMessage());
+        Optional<Clan> clan = clanManager.getClanByPlayer(player);
+        if(clan.isPresent()) {
+            event.setFormat("<" + clan.get().getTitle() + "> " + player.getName() + " §7: §f" + event.getMessage());
         }
     }
 }

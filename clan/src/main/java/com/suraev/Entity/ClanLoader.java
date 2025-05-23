@@ -32,14 +32,14 @@ public final class ClanLoader {
         }
     }
 
-    public void saveClans() {
+    public void saveClans(Map<UUID,Clan> clans) {
         try(Writer writer = new FileWriter(clansFile)) {
             gson.toJson(clans, writer);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-
+    
     public void loadClans() {
         try(Reader reader = new FileReader(clansFile)) {
             Type type = new TypeToken<Map<UUID, Clan>>(){}.getType();

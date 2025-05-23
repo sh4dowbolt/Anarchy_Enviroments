@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.command.PluginCommand;
 import com.suraev.Command.ClanCommandExecutor;
+import com.suraev.Listener.ChatListener;
 
 public class ClanRunner extends JavaPlugin implements Listener {
     private ClanLoader loader;
@@ -18,9 +19,12 @@ public class ClanRunner extends JavaPlugin implements Listener {
         getLogger().info("The clan plugin has been enabled");
 
         loader = new ClanLoader(this);
+        loader.loadClans();
 
         clanManager= new ClanManager(loader);
         clanInviteManager = new ClanInviteManager(this);
+
+        getServer().getPluginManager().registerEvents(new ChatListener(clanManager), this);
 
         PluginCommand clanCommand = getCommand("clan");
         if(clanCommand != null) {
@@ -36,7 +40,7 @@ public class ClanRunner extends JavaPlugin implements Listener {
     @Override
     public void onDisable() {
         getLogger().info("The clan plugin has been disabled");
-        loader.saveClans();
+        clanManager.saveClans();
         getLogger().info("The all of the clans have been saved");
     }
 }

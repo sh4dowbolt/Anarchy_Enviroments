@@ -21,7 +21,11 @@ public class ChatListener implements Listener {
         Player player = event.getPlayer();
         Optional<Clan> clan = clanManager.getClanByPlayer(player);
         if(clan.isPresent()) {
-            event.setFormat("<" + clan.get().getTitle() + "> " + player.getName() + " §7: §f" + event.getMessage());
+            String clanName = clan.get().getTitle();
+            String playerName = player.getName();
+            String message = event.getMessage();
+
+            event.setFormat("<" + clanName + "> " + "<" + playerName + "> " + message);
         }
     }
 }

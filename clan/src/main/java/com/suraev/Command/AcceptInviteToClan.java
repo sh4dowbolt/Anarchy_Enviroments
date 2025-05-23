@@ -28,7 +28,14 @@ public class AcceptInviteToClan implements CommandExecutor {
 
         if(commandSender instanceof Player player) {
 
-            if(strings.length>1) {
+            int lengthCommandArguments = strings.length;
+
+            if(lengthCommandArguments == 0 ||lengthCommandArguments>1) {
+                player.sendMessage("Укажите подкоманду accept, достаточно ввести /clan accept");
+                return true;
+            }
+
+            if(lengthCommandArguments>1) {
                 player.sendMessage("Указали лишние аргументы, достаточно ввести /clan accept");
                 return true;
             }
@@ -43,13 +50,14 @@ public class AcceptInviteToClan implements CommandExecutor {
 
             if(!inviteRequest.isPresent()) {
                 player.sendMessage("У вас нет активных предложений");
+                return true;
             }
 
             InviteClanRequest inviteClanRequest = inviteRequest.get();
             String nameOfClan = inviteClanRequest.getNameOfClan();
 
 
-            if(clanInviteManager.acceptInvite(player)) {
+            if(clanInviteManager.removeInvite(player)) {
                 clanManager.addClanMemberToClan(nameOfClan,player);
                 player.sendMessage("Вы приняты в клан "+nameOfClan);
 

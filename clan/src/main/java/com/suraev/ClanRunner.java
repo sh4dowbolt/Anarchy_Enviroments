@@ -26,6 +26,9 @@ public class ClanRunner extends JavaPlugin implements Listener {
         getCommand("сlan create").setExecutor(new CreateClan(clanManager));
         getCommand("clan invite").setExecutor(new InviteToClan(clanInviteManager,clanManager));
         getCommand("clan accept").setExecutor(new AcceptInviteToClan(clanManager, clanInviteManager));
+        getCommand("clan kick").setExecutor(new KickFromClan(clanManager));
+        getCommand("clan leave").setExecutor(new LeaveClan(clanManager));
+    
 
         loader.loadClans();
         getLogger().info("Finish loading");

@@ -1,6 +1,9 @@
 package com.suraev.Command;
 
 import com.suraev.Entity.ClanManager;
+import com.suraev.Exception.ClanNameAlreadyExistedException;
+import com.suraev.Exception.PlayerAlreadyInClanException;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -32,7 +35,13 @@ public class CreateClan implements CommandExecutor {
             }
 
             String titleOfClan= strings[1];
-            clanManager.createClan(player,titleOfClan);
+            try {
+                clanManager.createClan(player,titleOfClan);
+            } catch (PlayerAlreadyInClanException  e) {
+                player.sendMessage(e.getMessage());
+            } catch (ClanNameAlreadyExistedException e) {
+                player.sendMessage(e.getMessage());
+            }
 
             return true;
         }

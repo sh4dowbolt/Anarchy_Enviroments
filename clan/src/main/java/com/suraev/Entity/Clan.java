@@ -1,27 +1,38 @@
 package com.suraev.Entity;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.List; 
+import lombok.Getter;
+import lombok.Setter;
 
+
+@Getter
+@Setter
 public class Clan {
+
+    private Long id;
     private String title;
     private String description;
     private List<ClanMember> members;
-    ClanMember clanLeader;
 
-    public String getTitle() {
+
+    public synchronized String getTitle() {
         return title;
     }
+    
+    public synchronized ClanMember getOwner() {
+        return members.stream().filter(clanMember -> clanMember.getRole() == Role.LEADER).findFirst().orElse(null);
+    }
 
-    public void setTitle(String title) {
+    public synchronized void setTitle(String title) {
         this.title = title;
     }
 
-    public List<ClanMember> getMembers() {
+    public synchronized List<ClanMember> getMembers() {
         return members;
     }
 
-    public void addMember(ClanMember player) {
+    public synchronized void addMember(ClanMember player) {
         if(members == null) {
             members = new ArrayList<>();
         }
@@ -32,14 +43,17 @@ public class Clan {
         members.remove(player);
     }
 
-    public void setClanLeader(ClanMember player) {
-        clanLeader=player;
+    public synchronized boolean isPlayerClanLeader(ClanMember checkedClanMember) {
+        return members.stream().filter(clanMember -> clanMember.getRole() == Role.LEADER)
+        .anyMatch(clanMember -> clanMember.equals(checkedClanMember));
     }
 
-    public boolean isPlayerClanLeader(ClanMember clanMember) {
-        return clanMember.equals(clanLeader);
+    public boolean isPlayerOfficer(ClanMember checkedClanMember) {
+        return members.stream().filter(clanMember -> clanMember.getRole() == Role.OFFICER)
+        .anyMatch(clanMember -> clanMember.equals(checkedClanMember));
     }
-    public boolean isPlayerInClan(ClanMember clanMember) {
+
+    public synchronized boolean isPlayerInClan(ClanMember clanMember) {
         return members.contains(clanMember);
     }
 }

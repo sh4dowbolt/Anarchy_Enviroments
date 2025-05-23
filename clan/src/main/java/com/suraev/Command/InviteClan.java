@@ -12,12 +12,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
-public class InviteToClan implements CommandExecutor {
+public class InviteClan implements CommandExecutor {
 
     private final ClanInviteManager clanInviteManager;
     private final ClanManager clanManager;
 
-    public InviteToClan(ClanInviteManager clanInviteManager, ClanManager clanManager) {
+    public InviteClan(ClanInviteManager clanInviteManager, ClanManager clanManager) {
         this.clanInviteManager = clanInviteManager;
         this.clanManager = clanManager;
     }
@@ -36,21 +36,21 @@ public class InviteToClan implements CommandExecutor {
                 inviter.sendMessage("Указали лишние аргументы, используй: /clan invite <nickName>" );
                 return true;
             }
-
-            if(!clanManager.isPlayerClanLeader(inviter)) {
-                inviter.sendMessage("Прежде чем кого то пригласить, создай клан командой: /clan create <nameOfClan>");
+            
+            if(!clanManager.isPlayerClanLeader(inviter)  !clanManager.isPlayerOfficer(inviter)) {
+                inviter.sendMessage("Для приглашения в клан, вы должны быть лидером или офицером клана");
+                return true;
             }
 
-            Clan inviterClan = clanManager.getClanByPlayer(inviter);
+            Clan clanToInvite = clanManager.getClanByPlayer(inviter);
 
-            if(inviterClan == null) {
+            if(clanToInvite == null) {
                 inviter.sendMessage("Возникли проблемы с кланом, обратитесь к администратору");
                 return true;
             }
 
-
             String subCommand = strings[0];
-            if(!subCommand.equalsIgnoreCase("create")) {
+            if(!subCommand.equalsIgnoreCase("invite")) {
                 inviter.sendMessage("Неизвестная подкомада, используй: /clan invite <nickName> ");
                 return true;
             }
@@ -62,14 +62,16 @@ public class InviteToClan implements CommandExecutor {
                 return true;
             }
 
-            if(clanInviteManager.createInvite(inviterClan, inviter, targetPlayer)){
+            if(clanInviteManager.createInvite(clanToInvite, inviter, targetPlayer)){
                 inviter.sendMessage("Приглашение отправлено игроку "+targetPlayer.getName());
-                targetPlayer.sendMessage("Вас пригласили в клан "+inviterClan.getTitle()+" Чтобы принять приглашение," +
-                        "используйте команду /clan accept");
+                targetPlayer.sendMessage("Вас пригласили в клан "+clanToInvite.getTitle()+" Чтобы принять приглашение," +
+                        "используйте команду /clan accept. Для отказа используйте команду /clan cancel");
+                return true;
             }
 
-        }
+        } else {
             commandSender.sendMessage("Команда доступна только для игроков");
         return true;
     }
+    return false;
 }

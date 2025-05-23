@@ -49,13 +49,31 @@ public class MembersClan implements CommandExecutor {
                 
                 StringBuilder message = new StringBuilder();
                 message.append("Лидер клана: ");
-                message.append(clan.getMembers().stream().filter(member -> member.getRole().equals(Role.LEADER)).map(ClanMember::getName).collect(Collectors.joining(", ")));
+                message.append(clan.getMembers().stream().filter(member -> member.getRole().equals(Role.LEADER)).map(clanMember -> {
+                    ClanMemberInfo info = new ClanMemberInfo();
+                    info.setName(clanMember.getName());
+                    info.setRole(clanMember.getRole().toString());
+                    info.setOnlineStatus(clanMember.isOnline() ? "Онлайн" : "Офлайн");
+                    return info.toString();
+                }).collect(Collectors.joining(", ")));
                 message.append("\n");
                 message.append("Офицеры клана: ");
-                message.append(clan.getMembers().stream().filter(member -> member.getRole().equals(Role.OFFICER)).map(ClanMember::getName).collect(Collectors.joining(", ")));
+                message.append(clan.getMembers().stream().filter(member -> member.getRole().equals(Role.OFFICER)).map(clanMember -> {
+                    ClanMemberInfo info = new ClanMemberInfo();
+                    info.setName(clanMember.getName());
+                    info.setRole(clanMember.getRole().toString());
+                    info.setOnlineStatus(clanMember.isOnline() ? "Онлайн" : "Офлайн");
+                    return info.toString();
+                }).collect(Collectors.joining(", ")));
                 message.append("\n");
                 message.append("Участники клана: ");
-                message.append(clan.getMembers().stream().filter(member -> member.getRole().equals(Role.MEMBER)).map(ClanMember::getName).collect(Collectors.joining(", ")));
+                message.append(clan.getMembers().stream().filter(member -> member.getRole().equals(Role.MEMBER)).map(clanMember -> {
+                    ClanMemberInfo info = new ClanMemberInfo();
+                    info.setName(clanMember.getName());
+                    info.setRole(clanMember.getRole().toString());
+                    info.setOnlineStatus(clanMember.isOnline() ? "Онлайн" : "Офлайн");
+                    return info.toString();
+                }).collect(Collectors.joining(", ")));
         
                 player.sendMessage(message.toString());
                 return true;

@@ -9,4 +9,8 @@ public class ClanMemberInfo {
     private String name;
     private String onlineStatus;
     private String role;
+
+    public String toString() {
+        return name + " " + onlineStatus;
+    }
 }

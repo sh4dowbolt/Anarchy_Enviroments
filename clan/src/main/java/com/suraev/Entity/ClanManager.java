@@ -114,4 +114,11 @@ public class ClanManager {
     public void saveClans() {
         loader.saveClans(clans);
     }
+
+    public boolean hasPermission(Player player, Role role) {
+        ClanMember clanMember = new ClanMember(player);
+        return clans.values().stream().filter(clan -> clan.isPlayerInClan(clanMember))
+        .findFirst().map(clan -> clan.hasPermission(clanMember, role))
+        .orElse(false);
+    }
 }

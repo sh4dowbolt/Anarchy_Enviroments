@@ -12,6 +12,8 @@ import com.suraev.Command.AcceptInviteToClan;
 import com.suraev.Command.InviteCancel;
 import com.suraev.Command.KickFromClan;
 import com.suraev.Command.LeaveClan;
+import com.suraev.Entity.Role;
+import org.bukkit.entity.Player;
 
 public class ClanCommandExecutor implements CommandExecutor{
     private final ClanManager clanManager;
@@ -24,10 +26,14 @@ public class ClanCommandExecutor implements CommandExecutor{
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+     
        if (args.length == 0) {
         sender.sendMessage("Используйте /clan help для получения списка команд");
         return true;
        }
+
+       Player player = (Player) sender;
+       
        switch (args[0].toLowerCase()) {
         case "create":
             return new CreateClan(clanManager).onCommand(sender, command, label, args);
@@ -38,7 +44,10 @@ public class ClanCommandExecutor implements CommandExecutor{
         case "cancel":
             return new InviteCancel(clanInviteManager,clanManager).onCommand(sender, command, label, args);
         case "kick":
-            return new KickFromClan(clanManager).onCommand(sender, command, label, args);
+            if(clanManager.hasPermission(player, Role.LEADER) || clanManager.hasPermission(player, Role.OFFICER)) {
+                return new KickFromClan(clanManager).onCommand(sender, command, label, args);
+            }
+            return false;
         case "leave":
             return new LeaveClan(clanManager).onCommand(sender, command, label, args);
         case "remove":

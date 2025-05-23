@@ -2,7 +2,6 @@ package com.suraev.Command;
 
 import com.suraev.Entity.Clan;
 import com.suraev.Entity.ClanManager;
-import com.suraev.Entity.ClanMember;
 import com.suraev.Entity.DTO.ClanInviteManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -36,8 +35,8 @@ public class InviteClan implements CommandExecutor {
                 inviter.sendMessage("Указали лишние аргументы, используй: /clan invite <nickName>" );
                 return true;
             }
-            
-            if(!clanManager.isPlayerClanLeader(inviter) && !clanManager.isPlayerOfficer(inviter)) {
+            //TODO: проверить, является ли игрок лидером или офицером клана || !clanManager.isPlayerOfficer(inviter)
+            if(!clanManager.isPlayerClanLeader(inviter) ) {
                 inviter.sendMessage("Для приглашения в клан, вы должны быть лидером или офицером клана");
                 return true;
             }
@@ -61,6 +60,11 @@ public class InviteClan implements CommandExecutor {
                 inviter.sendMessage("Игрок "+nickName+" оффлайн или его не существует!");
                 return true;
             }
+            if(inviter.getName().equals(targetPlayer.getName())) {
+                inviter.sendMessage("Вы не можете пригласить себя в клан");
+                return true;
+            }
+
 
             if(clanInviteManager.createInvite(clanToInvite.get(), inviter, targetPlayer)){
                 inviter.sendMessage("Приглашение отправлено игроку "+targetPlayer.getName());

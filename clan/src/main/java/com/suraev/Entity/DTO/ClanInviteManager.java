@@ -32,9 +32,9 @@ public class ClanInviteManager {
     public boolean createInvite(Clan clan, Player inviter, Player targetTo) {
         ClanMember sender = new ClanMember(inviter);
         ClanMember target = new ClanMember(targetTo);
+       
 
-        boolean inviteIsExpired = pendingInvites.get(target).isExpired();
-        if(pendingInvites.containsKey(target) && !inviteIsExpired) {
+        if(pendingInvites.containsKey(target) && !requestIsExpired(pendingInvites.get(target))) {
             inviter.sendMessage("Игрок уже имеет активное приглашение");
             return false;
         }
@@ -69,7 +69,7 @@ public class ClanInviteManager {
         ClanMember clanMember = new ClanMember(player);
         InviteClanRequest invite = pendingInvites.get(clanMember);
 
-        if(invite == null || invite.isExpired()) {
+        if(invite == null || requestIsExpired(invite)) {
             player.sendMessage("Приглашение истекло или не найдено");
             return false;
         }
@@ -80,5 +80,9 @@ public class ClanInviteManager {
 
     public void cleanUpExpired() {
         pendingInvites.entrySet().removeIf(entry -> entry.getValue().isExpired());
+    }
+
+    private boolean requestIsExpired(InviteClanRequest invite) {
+        return invite.isExpired();
     }
 }

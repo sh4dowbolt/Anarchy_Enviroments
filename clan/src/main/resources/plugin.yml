@@ -5,22 +5,13 @@ api-version: '1.21.1'
 
 
 commands:
-  clan create:
-    description: создать клан
-    usage: /clan create <name>
-  clan invite:
-    description: пригласить в клан
-    usage: /clan invite <никнейм>
-  clan accept:
-    description: принять приглашение
-    usage: /clan accept
-  clan cancel:
-    description: отменить приглашение
-    usage: /clan cancel
-  clan kick:
-    description: кикнуть из клана
-    usage: /clan kick <никнейм>
-  clan leave:
-    description: покинуть клан
-    usage: /clan leave
+  clan:
+    description: управление кланом
+    usage: |
+      /clan create <name> - создать клан
+      /clan invite <name> - пригласить в клан
+      /clan accept - принять приглашение
+      /clan cancel - отменить приглашение
+      /clan kick <name> - кикнуть из клана
+      /clan leave - покинуть клан
 

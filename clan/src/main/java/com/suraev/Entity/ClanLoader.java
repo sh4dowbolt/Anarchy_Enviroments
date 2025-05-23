@@ -8,11 +8,13 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
+import lombok.Getter;
+import java.util.UUID;
 
+@Getter
 public final class ClanLoader {
 
-    private Map<String, Clan> clans = new HashMap<>();
+    private Map<UUID, Clan> clans = new HashMap<>();
     private Gson gson = new Gson();
     private File clansFile;
 
@@ -40,8 +42,8 @@ public final class ClanLoader {
 
     public void loadClans() {
         try(Reader reader = new FileReader(clansFile)) {
-            Type type = new TypeToken<Map<String, Clan>>(){}.getType();
-            Map<String, Clan> loaded = gson.fromJson(reader,type);
+            Type type = new TypeToken<Map<UUID, Clan>>(){}.getType();
+            Map<UUID, Clan> loaded = gson.fromJson(reader,type);
             if (loaded != null) {
                 clans = loaded;
             }

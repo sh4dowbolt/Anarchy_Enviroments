@@ -36,6 +36,6 @@ public class LeaveClan implements CommandExecutor {
             }
             sender.sendMessage("Только игроки могут покинуть клан");
             return true;
-        }
-    }
+     }
 }
+

@@ -37,7 +37,7 @@ public class InviteClan implements CommandExecutor {
                 return true;
             }
             
-            if(!clanManager.isPlayerClanLeader(inviter)  !clanManager.isPlayerOfficer(inviter)) {
+            if(!clanManager.isPlayerClanLeader(inviter) || !clanManager.isPlayerOfficer(inviter)) {
                 inviter.sendMessage("Для приглашения в клан, вы должны быть лидером или офицером клана");
                 return true;
             }
@@ -74,4 +74,5 @@ public class InviteClan implements CommandExecutor {
         return true;
     }
     return false;
+  }
 }

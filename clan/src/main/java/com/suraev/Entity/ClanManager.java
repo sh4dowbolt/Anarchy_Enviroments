@@ -6,18 +6,22 @@ import com.suraev.Exception.ClanNameAlreadyExistedException;
 import com.suraev.Exception.PlayerAlreadyInClanException;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.Map;
+import com.suraev.Entity.Clan;
+
 
 public class ClanManager {
 
     private ClanLoader loader;
-    private Map<String,Clan> clans;
+    private Map<UUID,Clan> clans;
 
     public ClanManager(ClanLoader loader) {
         this.loader = loader;
 
         this.clans = new ConcurrentHashMap<>(loader.getClans());
     }   
-
+    
 
     public void createClan(Player player,String name) throws PlayerAlreadyInClanException, ClanNameAlreadyExistedException {
 
@@ -26,6 +30,7 @@ public class ClanManager {
         if(isPlayerAlreadyInClan(playerDTO)) {
             throw new PlayerAlreadyInClanException("Вы уже находитесь в клане");
         }
+
 
         if(isClanNameAlreadyExists(name)) {
             throw new ClanNameAlreadyExistedException("Клан с таким названием уже существует"); 
@@ -37,7 +42,7 @@ public class ClanManager {
         ClanMember leader= new ClanMember(player);
         leader.setRole(Role.LEADER);
         clan.addMember(leader);
-        
+
         insertClanWithTitle(clan);
 
     }
@@ -90,15 +95,15 @@ public class ClanManager {
 
     public boolean removeClan(Player player) {
         ClanMember clanMember = new ClanMember(player);
-        Optional<Clan> clan = clans.values().stream().filter(clan -> clan.isPlayerInClan(clanMember)).findFirst();
-        if(clan.isPresent()) {
-            clans.remove(clan.get().getId());
+        Optional<Clan> optionalClan = clans.values().stream().filter(clan -> clan.isPlayerInClan(clanMember)).findFirst();
+        if(optionalClan.isPresent()) {
+            clans.remove(optionalClan.get().getId());
             return true;
         }
         return false;
     }
 
-    public String generateUniqueId() {
-        return UUID.randomUUID().toString();
+    public UUID generateUniqueId() {
+        return UUID.randomUUID();
     }
 }

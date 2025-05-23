@@ -3,6 +3,9 @@ package com.suraev.Listener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import com.suraev.Entity.ClanManager;
+import org.bukkit.entity.Player;
+import com.suraev.Entity.Clan;
 
 public class ChatListener implements Listener {
 

@@ -55,6 +55,8 @@ public class ClanCommandExecutor implements CommandExecutor{
             return new ClanInfo(clanManager).onCommand(sender, command, label, args);
         case "members":
             return new MembersClan(clanManager).onCommand(sender, command, label, args);
+        case "disband":
+            return new DisbandClan(clanManager).onCommand(sender, command, label, args);
         default:
             sender.sendMessage("Неверная подкоманда: используйте /clan help для получения списка команд");
             return false;

@@ -17,6 +17,7 @@ commands:
       /clan remove - удалить клан, лидером которого вы являетесь
       /clan info - информация о клане
       /clan members - информация о участниках клана
+      /clan disband - распустить клан
 
 permissions:
   clan.remove:

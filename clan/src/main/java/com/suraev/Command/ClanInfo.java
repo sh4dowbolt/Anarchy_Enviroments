@@ -40,14 +40,11 @@ public class ClanInfo implements CommandExecutor {
 
         StringBuilder message = new StringBuilder();
 
-    
+        message.append("Информация о клане: ").append(clan.getTitle()).append("\n")
+        .append("Описание: ").append(clan.getDescription()).append("\n");
 
-        message.append("Информация о клане: ").append(clan.getTitle()).append("\n").append("Описание: ").append(clan.getDescription()).append("\n");
         message.append("Лидер клана: ").append(clan.getOwner().getName()).append("\n");
-        message.append("Офицеры клана: ").append(clan.getMembers().stream().filter(clanMember -> clanMember.getRole() == Role.OFFICER)
-        .map(ClanMember::getName).collect(Collectors.joining(", "))).append("\n");
-        message.append("Участники клана: ").append(clan.getMembers().stream().filter(clanMember -> clanMember.getRole() != Role.MEMBER)
-        .map(ClanMember::getName).collect(Collectors.joining(", ")));
+    
         sender.sendMessage(message.toString());
         return true;
     }

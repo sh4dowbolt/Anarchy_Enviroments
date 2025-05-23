@@ -16,6 +16,7 @@ public class RemoveClan implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+   
         if(sender instanceof Player player) {
             if(args.length == 0) {
                 player.sendMessage("Неверно указана подкоманда: используй /help для получения списка команд");

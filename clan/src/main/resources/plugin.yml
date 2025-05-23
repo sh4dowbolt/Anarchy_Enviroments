@@ -16,3 +16,28 @@ commands:
       /clan leave - покинуть клан
       /clan remove - удалить клан, лидером которого вы являетесь
       /clan info - информация о клане
+
+
+permissions:
+  clan.create:
+    description: разрешение на создание клана
+    default: true
+  clan.invite:
+    description: разрешение на приглашение в клан
+    default: true
+  clan.accept:
+    description: разрешение на принятие приглашения
+    default: true
+  clan.kick:
+    description: разрешение на кикнуть из клана
+    default: true
+  clan.leave:
+    description: разрешение на покинуть клан
+    default: true 
+  clan.remove:
+    description: разрешение на удаление клана
+    default: op
+  clan.info:
+    description: разрешение на получение информации о клане
+    default: true
+

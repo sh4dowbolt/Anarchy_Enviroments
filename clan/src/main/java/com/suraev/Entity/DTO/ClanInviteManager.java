@@ -31,6 +31,7 @@ public class ClanInviteManager {
 
     public boolean createInvite(Clan clan, Player inviter, Player targetTo) {
         ClanMember sender = new ClanMember(inviter);
+        
         ClanMember target = new ClanMember(targetTo);
        
 

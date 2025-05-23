@@ -58,4 +58,10 @@ public class Clan {
     public synchronized boolean isPlayerInClan(ClanMember clanMember) {
         return members.contains(clanMember);
     }
+
+    public synchronized boolean hasPermission(ClanMember checkedClanMember, Role role) {
+        return members.stream().filter(clanmember -> clanmember.equals(checkedClanMember))
+        .findFirst().map(clanMember -> clanMember.getRole().equals(role))
+        .orElse(false);
+    }
 }

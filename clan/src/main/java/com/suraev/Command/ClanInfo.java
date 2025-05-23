@@ -10,6 +10,7 @@ import com.suraev.Entity.Role;
 
 import java.util.stream.Collectors;
 import java.util.Optional;
+import org.bukkit.entity.Player;
 
 public class ClanInfo implements CommandExecutor {
     private final ClanManager clanManager;
@@ -25,8 +26,11 @@ public class ClanInfo implements CommandExecutor {
             return true;
         }
 
-        String clanName = args[0];
-        Optional<Clan> optionalClan = clanManager.getClanByName(clanName);
+        if(!(sender instanceof Player player)) {
+            sender.sendMessage("Команда доступна только для игроков");
+            return true;
+        }
+        Optional<Clan> optionalClan = clanManager.getClanByPlayer(player);
         if(optionalClan.isEmpty()) {
             sender.sendMessage("Для получения информации о клане, вы должны быть в клане");
             return true;

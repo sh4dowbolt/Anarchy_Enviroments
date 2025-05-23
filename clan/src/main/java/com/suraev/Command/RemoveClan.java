@@ -18,6 +18,11 @@ public class RemoveClan implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
    
         if(sender instanceof Player player) {
+            
+            if(!player.hasPermission("clan.remove")) {
+                player.sendMessage("У вас нет прав на удаление клана");
+                return true;
+            }
             if(args.length == 0) {
                 player.sendMessage("Неверно указана подкоманда: используй /help для получения списка команд");
                 return true;

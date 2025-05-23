@@ -33,7 +33,7 @@ public class ClanCommandExecutor implements CommandExecutor{
        }
 
        Player player = (Player) sender;
-       
+
        switch (args[0].toLowerCase()) {
         case "create":
             return new CreateClan(clanManager).onCommand(sender, command, label, args);
@@ -47,13 +47,14 @@ public class ClanCommandExecutor implements CommandExecutor{
             if(clanManager.hasPermission(player, Role.LEADER) || clanManager.hasPermission(player, Role.OFFICER)) {
                 return new KickFromClan(clanManager).onCommand(sender, command, label, args);
             }
-            return false;
         case "leave":
             return new LeaveClan(clanManager).onCommand(sender, command, label, args);
         case "remove":
             return new RemoveClan(clanManager).onCommand(sender, command, label, args);
         case "info":
             return new ClanInfo(clanManager).onCommand(sender, command, label, args);
+        case "members":
+            return new MembersClan(clanManager).onCommand(sender, command, label, args);
         default:
             sender.sendMessage("Неверная подкоманда: используйте /clan help для получения списка команд");
             return false;

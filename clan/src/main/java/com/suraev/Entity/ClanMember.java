@@ -1,11 +1,15 @@
 package com.suraev.Entity;
 
 import org.bukkit.entity.Player;
+import org.bukkit.Bukkit;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Objects;
 import java.util.UUID;
 
-
+@Getter
+@Setter
 public class ClanMember {
 
     private String name;
@@ -19,17 +23,6 @@ public class ClanMember {
         this.role = Role.MEMBER;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public UUID getUuid() {
-        return uuid;
-    }
-    
-    public Role getRole() {
-        return role;
-    }
 
     public void setRole(Role role) {
         this.role = role;
@@ -47,5 +40,9 @@ public class ClanMember {
     @Override
     public int hashCode() {
         return Objects.hash(name, uuid);
+    }
+
+    public boolean isOnline() {
+        return Bukkit.getPlayer(uuid) != null;
     }
 }

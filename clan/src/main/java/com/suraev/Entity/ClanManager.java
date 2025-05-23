@@ -47,7 +47,8 @@ public class ClanManager {
 
         insertClanWithTitle(clan);
     } else {
-        player.sendMessage("Название клана должно быть от 3 до 10 символов");
+            player.sendMessage("Название клана должно быть от 3 до 10 символов");
+        }
     }
 
     private boolean validateClanName(String name) {

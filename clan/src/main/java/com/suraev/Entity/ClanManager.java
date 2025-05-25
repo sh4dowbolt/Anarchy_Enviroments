@@ -107,6 +107,16 @@ public class ClanManager {
         }
         return false;
     }
+
+    public boolean removeClanByName(String clanName) {
+        Optional<Clan> optionalClan =   clans.values().stream()
+        .filter(clan -> clan.getTitle().equals(clanName)).findFirst();
+        if(optionalClan.isPresent()) {
+            clans.remove(optionalClan.get().getId());
+            return true;
+        }
+        return false;
+    }
     public UUID generateUniqueId() {
         return UUID.randomUUID();
     }

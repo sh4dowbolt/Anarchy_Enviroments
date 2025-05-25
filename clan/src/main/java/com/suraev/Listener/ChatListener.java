@@ -22,10 +22,10 @@ public class ChatListener implements Listener {
         Optional<Clan> clan = clanManager.getClanByPlayer(player);
         if(clan.isPresent()) {
             String clanName = clan.get().getTitle();
-            String playerName = player.getName();
+            String playerName = player.getDisplayName();
             String message = event.getMessage();
 
-            event.setFormat("<" + clanName + "> " + "<" + playerName + "> " + message);
+            event.setFormat("<" + clanName + "> " + playerName + " §7:§f" + message);
         }
     }
 }

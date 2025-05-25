@@ -98,6 +98,14 @@ public class ClanManager {
         return true;
     }
 
+    public boolean updateClanMemberRole(UUID clanId,Player player,Role role) {
+        ClanMember clanMemberByName = new ClanMember(player);
+        clans.values().stream().filter(clan -> clan.getId().equals(clanId)).findFirst()
+        .ifPresent(clan -> clan.getMembers().stream().filter(clanMemberByName::equals)
+        .findFirst().ifPresent(clanMember -> clanMember.setRole(role)));
+        return true;
+    }
+
     public boolean removeClan(Player player) {
         ClanMember clanMember = new ClanMember(player);
         Optional<Clan> optionalClan = clans.values().stream().filter(clan -> clan.isPlayerInClan(clanMember)).findFirst();

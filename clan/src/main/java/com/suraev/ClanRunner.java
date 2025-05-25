@@ -8,6 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.command.PluginCommand;
 import com.suraev.Command.ClanCommandExecutor;
 import com.suraev.Listener.ChatListener;
+import com.suraev.TabComplete.ClanTabCompleter;
 
 public class ClanRunner extends JavaPlugin implements Listener {
     private ClanLoader loader;
@@ -32,7 +33,7 @@ public class ClanRunner extends JavaPlugin implements Listener {
         } else {
             getLogger().severe("The clan command is not found");
         }
-        
+        getCommand("clan").setTabCompleter(new ClanTabCompleter());
         loader.loadClans();
         getLogger().info("Finish loading");
     }

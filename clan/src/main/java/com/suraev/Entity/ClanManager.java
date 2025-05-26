@@ -10,16 +10,20 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map;
 import com.suraev.Entity.Clan;
 import com.suraev.Entity.ClanMember;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Comparator;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class ClanManager {
-
     private ClanLoader loader;
     private Map<UUID,Clan> clans;
+    private static AtomicLong lastClanId;
 
     public ClanManager(ClanLoader loader) {
         this.loader = loader;
-
         this.clans = new ConcurrentHashMap<>(loader.getClans());
+        this.lastClanId = new AtomicLong(loader.getLastClanId());
     }   
     
 
@@ -138,5 +142,19 @@ public class ClanManager {
         return clans.values().stream().filter(clan -> clan.isPlayerInClan(clanMember))
         .findFirst().map(clan -> clan.hasPermission(clanMember, role))
         .orElse(false);
+    }
+
+    public List<String> getClanTitles() {
+        return clans.values().stream().map(info -> info.getId(), ).collect(Collectors.toList());
+    }
+
+    public List<Clan> getClans() {
+        List <Clan> clansList = new ArrayList<>(clans.values());
+        return clansList;
+    }
+
+    public Long getLastClanId() {
+        lastClanId.incrementAndGet();
+        return lastClanId.get();
     }
 }

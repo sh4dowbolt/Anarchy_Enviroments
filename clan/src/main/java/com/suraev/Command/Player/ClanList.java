@@ -24,15 +24,9 @@ public class ClanList implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         
         if(args.length >2) {
-           
-        }
-
-        if(!(sender instanceof Player)) {
-            sender.sendMessage("Эта команда доступна только для игроков");
+            sender.sendMessage("Проверьте правильность ввода команды: /clan list <страница>");
             return true;
         }
-
-     
 
         if(args[0].equalsIgnoreCase("list")) {
 
@@ -73,8 +67,7 @@ public class ClanList implements CommandExecutor {
             player.sendMessage(message);
             return true;
         }  
-        sender.sendMessage("Используй: /clan list <страница>");
-       return true;   
+        
     }
-    
+
 }

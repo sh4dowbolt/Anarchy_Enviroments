@@ -1,4 +1,4 @@
-package com.suraev.Command;
+package com.suraev.Command.Admin;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

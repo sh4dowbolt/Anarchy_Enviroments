@@ -12,6 +12,7 @@ import com.suraev.Command.AcceptInviteToClan;
 import com.suraev.Command.InviteCancel;
 import com.suraev.Command.KickFromClan;
 import com.suraev.Command.LeaveClan;
+import com.suraev.Command.Admin.RemoveClan;
 import com.suraev.Entity.Role;
 import org.bukkit.entity.Player;
 

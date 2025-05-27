@@ -13,6 +13,10 @@ public class RenameClan implements CommandExecutor {
     public RenameClan(ClanManager clanManager) {
         this.clanManager = clanManager;
     }
-    
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        return false;
+    }
     
 }

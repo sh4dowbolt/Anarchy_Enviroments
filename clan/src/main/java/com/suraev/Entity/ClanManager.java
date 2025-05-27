@@ -1,6 +1,7 @@
 package com.suraev.Entity;
 
 import org.bukkit.entity.Player;
+import org.checkerframework.checker.units.qual.C;
 
 import com.suraev.Exception.ClanNameAlreadyExistedException;
 import com.suraev.Exception.PlayerAlreadyInClanException;
@@ -14,10 +15,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Comparator;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
+import com.suraev.Entity.DTO.ClanInfo;
+
 
 public class ClanManager {
     private ClanLoader loader;
     private Map<UUID,Clan> clans;
+    private List<ClanInfo> clansInfo;
+    private boolean isCacheDirty = true;
     private static AtomicLong lastClanId;
 
     public ClanManager(ClanLoader loader) {
@@ -43,11 +49,13 @@ public class ClanManager {
         }
 
         Clan clan = new Clan();
-        clan.setId(generateUniqueId());
+        clan.setId(getLastClanId());
         clan.setTitle(name);
         ClanMember leader= new ClanMember(player);
         leader.setRole(Role.LEADER);
         clan.addMember(leader);
+
+    
 
         insertClanWithTitle(clan);
     } else {
@@ -69,6 +77,7 @@ public class ClanManager {
 
     private void insertClanWithTitle(Clan clan) {
         clans.put(clan.getId(), clan);
+        isCacheDirty = true;
     }
 
     public boolean isPlayerClanLeader(Player player) {
@@ -117,6 +126,7 @@ public class ClanManager {
             clans.remove(optionalClan.get().getId());
             return true;
         }
+        isCacheDirty = true;
         return false;
     }
 
@@ -127,12 +137,10 @@ public class ClanManager {
             clans.remove(optionalClan.get().getId());
             return true;
         }
+        isCacheDirty = true;
         return false;
     }
-    public UUID generateUniqueId() {
-        return UUID.randomUUID();
-    }
-
+  
     public void saveClans() {
         loader.saveClans(clans);
     }
@@ -144,17 +152,28 @@ public class ClanManager {
         .orElse(false);
     }
 
-    public List<String> getClanTitles() {
-        return clans.values().stream().map(info -> info.getId(), ).collect(Collectors.toList());
+    public List<ClanInfo> getClansInfo(int page, int pageSize) {
+
+        if(isCacheDirty || clansInfo == null) {
+            clansInfo = clans.values().stream().map(info -> new ClanInfo(info.getId(),info.getTitle()))
+            .sorted(Comparator.comparing(ClanInfo::getId,Comparator.naturalOrder()))
+            .collect(Collectors.toList());
+            isCacheDirty = false;
+        }
+
+        return clansInfo.stream()
+        .skip((page-1)*pageSize)
+        .limit(pageSize)
+        .collect(Collectors.toList());
     }
 
-    public List<Clan> getClans() {
-        List <Clan> clansList = new ArrayList<>(clans.values());
-        return clansList;
+    public int getClansSize() {
+        return clans.size();
     }
+
 
     public Long getLastClanId() {
         lastClanId.incrementAndGet();
-        return lastClanId.get();
+       return lastClanId.get();       
     }
 }

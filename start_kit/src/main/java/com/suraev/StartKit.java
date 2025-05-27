@@ -15,7 +15,7 @@ public final class StartKit extends JavaPlugin implements Listener {
         FileConfiguration config = getConfig();
         config.options().copyDefaults(true);
 
-        getServer().getPluginManager().registerEvents(new OnFirstJoinListener(config),this);
+        
         getCommand("set_type_kit").setExecutor(new SetTypeOfKit(config));
 
         getLogger().info(this.getName()+"has been enabled");

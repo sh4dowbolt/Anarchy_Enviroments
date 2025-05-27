@@ -1,4 +1,4 @@
-package com.suraev.Command;
+package com.suraev.Command.Admin;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -23,18 +23,23 @@ public class RemoveClan implements CommandExecutor {
                 player.sendMessage("У вас нет прав на удаление клана");
                 return true;
             }
-            if(args.length == 0) {
-                player.sendMessage("Неверно указана подкоманда: используй /help для получения списка команд");
+            if(args.length == 1) {
+                player.sendMessage("Укажите имя клана");
                 return true;
             }
-            if(args.length > 1) {
+            if(args.length > 2) {
                 player.sendMessage("Указаны лишние аргументы: используй /clan remove");
                 return true;
             }
             if(args[0].equalsIgnoreCase("remove")) {
-                removeClan(player);
+                String clanName = args[1];
+                if(clanManager.getClanByName(clanName).isEmpty()) {
+                    player.sendMessage("Клан с таким именем не найден");
+                    return true;
+                }
+                clanManager.removeClanByName(clanName);
                 player.sendMessage("Клан успешно удален");
-                return true;
+                return true;              
             }
         }   
         sender.sendMessage("Команда доступна только для игроков");

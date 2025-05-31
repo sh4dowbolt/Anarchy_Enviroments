@@ -43,7 +43,7 @@ public class OfficerClan implements CommandExecutor {
                         return true;
                     }
                     Clan clan = optionalClan.get();
-                    UUID clanId = clan.getId();
+                    Long clanId = clan.getId();
                     
                     clanManager.updateClanMemberRole(clanId, target, Role.OFFICER);
 

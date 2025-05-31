@@ -41,7 +41,7 @@ public class DeofficerClan implements CommandExecutor {
                             return true;
                         }
                         Clan clan = optionalClan.get();
-                        UUID clanId = clan.getId();
+                        Long clanId = clan.getId();
                         
                         clanManager.updateClanMemberRole(clanId, target, Role.MEMBER);
     
@@ -55,4 +55,4 @@ public class DeofficerClan implements CommandExecutor {
             return false;
         }
     }
-}
+

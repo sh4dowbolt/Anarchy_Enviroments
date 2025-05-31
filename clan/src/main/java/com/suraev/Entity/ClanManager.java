@@ -21,7 +21,7 @@ import com.suraev.Entity.DTO.ClanInfo;
 
 public class ClanManager {
     private ClanLoader loader;
-    private Map<UUID,Clan> clans;
+    private Map<Long,Clan> clans;
     private List<ClanInfo> clansInfo;
     private boolean isCacheDirty = true;
     private static AtomicLong lastClanId;
@@ -111,7 +111,7 @@ public class ClanManager {
         return true;
     }
 
-    public boolean updateClanMemberRole(UUID clanId,Player player,Role role) {
+    public boolean updateClanMemberRole(Long clanId,Player player,Role role) {
         ClanMember clanMemberByName = new ClanMember(player);
         clans.values().stream().filter(clan -> clan.getId().equals(clanId)).findFirst()
         .ifPresent(clan -> clan.getMembers().stream().filter(clanMemberByName::equals)

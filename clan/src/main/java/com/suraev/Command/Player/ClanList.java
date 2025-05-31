@@ -67,7 +67,9 @@ public class ClanList implements CommandExecutor {
             player.sendMessage(message);
             return true;
         }  
-        
+        sender.sendMessage("Эта команда доступна только для игроков");
+        return false;
     }
+
 
 }

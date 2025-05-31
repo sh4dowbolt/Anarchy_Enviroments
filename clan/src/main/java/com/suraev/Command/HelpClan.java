@@ -5,15 +5,17 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+
 public class HelpClan implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        StringBuilder helpMessage = new StringBuilder();
+      
         if(sender instanceof Player player) {
             
             if(args[0].equalsIgnoreCase("help")) {
+                StringBuilder helpMessage = new StringBuilder();
                 helpMessage.append("§c§lСправка по командам клана\n");
                 helpMessage.append("§6/clan create <name> - §7создать клан\n");
                 helpMessage.append("§6/clan invite <name> - §7пригласить в клан\n");
@@ -32,10 +34,11 @@ public class HelpClan implements CommandExecutor {
                     helpMessage.append("§7/clan remove <name> - удалить клан\n");
                 }
 
-                player.sendMessage(helpMessage);
+                player.sendMessage(helpMessage.toString());
                 return true;
             }
+        }
+        sender.sendMessage("Эта команда доступна только для игроков");
         return false;
     }
-}
 }

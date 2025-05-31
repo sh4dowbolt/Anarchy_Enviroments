@@ -11,12 +11,11 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 @Getter
 public final class ClanLoader {
 
-    private Map<UUID, Clan> clans = new HashMap<>();
+    private Map<Long, Clan> clans = new HashMap<>();
     private Gson gson = new Gson();
     private File clansFile;
     private File lastClanIdFile;
@@ -61,7 +60,7 @@ public final class ClanLoader {
         }
     }
 
-    public void saveClans(Map<UUID,Clan> clans) {
+    public void saveClans(Map<Long,Clan> clans) {
         try(Writer writer = new FileWriter(clansFile)) {
             gson.toJson(clans, writer);
         } catch (IOException e) {
@@ -71,8 +70,8 @@ public final class ClanLoader {
     
     public void loadClans() {
         try(Reader reader = new FileReader(clansFile)) {
-            Type type = new TypeToken<Map<UUID, Clan>>(){}.getType();
-            Map<UUID, Clan> loaded = gson.fromJson(reader,type);
+            Type type = new TypeToken<Map<Long, Clan>>(){}.getType();
+            Map<Long, Clan> loaded = gson.fromJson(reader,type);
             if (loaded != null) {
                 clans = loaded;
             }

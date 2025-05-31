@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List; 
 import lombok.Getter;
 import lombok.Setter;
-
+import org.bukkit.Location;
 @Getter
 @Setter
 public class Clan {
@@ -13,6 +13,7 @@ public class Clan {
     private String title;
     private String description;
     private List<ClanMember> members;
+    private Location clanHome;
 
 
     public synchronized String getTitle() {

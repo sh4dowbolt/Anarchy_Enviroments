@@ -6,14 +6,19 @@ import com.suraev.Entity.DTO.ClanInviteManager;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.command.PluginCommand;
+
+import com.earth2me.essentials.Essentials;
 import com.suraev.Command.ClanCommandExecutor;
 import com.suraev.Listener.ChatListener;
 import com.suraev.TabComplete.ClanTabCompleter;
+import org.bukkit.plugin.Plugin;
+
 
 public class ClanRunner extends JavaPlugin implements Listener {
     private ClanLoader loader;
     private ClanManager clanManager;
     private ClanInviteManager clanInviteManager;
+    private Essentials essentials;
 
     @Override
     public void onEnable() {
@@ -35,6 +40,16 @@ public class ClanRunner extends JavaPlugin implements Listener {
         }
         getCommand("clan").setTabCompleter(new ClanTabCompleter());
         loader.loadClans();
+
+
+        Plugin essentialsPlugin = getServer().getPluginManager().getPlugin("Essentials");
+        if(essentialsPlugin != null) {
+            getLogger().info("Essentials plugin found");
+            essentials = (Essentials) essentialsPlugin;
+        } else {
+            getLogger().severe("Essentials plugin not found");
+        }
+
         getLogger().info("Finish loading");
     }
 

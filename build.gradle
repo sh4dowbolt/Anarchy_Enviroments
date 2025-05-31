@@ -25,7 +25,7 @@ subprojects{
         }
     }
     dependencies {
-        compileOnly("io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT")
+        compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
         compileOnly("de.tr7zw:item-nbt-api-plugin:2.13.2")
         compileOnly('net.essentialsx:EssentialsX:2.20.0')
 

@@ -28,8 +28,12 @@ public class ClanManager {
 
     public ClanManager(ClanLoader loader) {
         this.loader = loader;
+        if(loader.getLastClanId() == null) {
+            this.lastClanId = new AtomicLong(0);
+        } else {
+            this.lastClanId = new AtomicLong(loader.getLastClanId());
+        }
         this.clans = new ConcurrentHashMap<>(loader.getClans());
-        this.lastClanId = new AtomicLong(loader.getLastClanId());
     }   
     
 
@@ -173,7 +177,7 @@ public class ClanManager {
 
 
     public Long getLastClanId() {
-        lastClanId.incrementAndGet();
+       lastClanId.incrementAndGet();
        return lastClanId.get();       
     }
 }

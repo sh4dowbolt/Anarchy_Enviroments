@@ -6,30 +6,6 @@ api-version: '1.21.1'
 
 commands:
   clan:
-    description: управление кланом
-    usage: |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
-      /clan create <name> - создать клан
-      /clan invite <name> - пригласить в клан
-      /clan accept - принять приглашение
-      /clan cancel - отменить приглашение
-      /clan kick <name> - кикнуть из клана
-      /clan leave - покинуть клан
-      /clan info - информация о клане
-      /clan members - информация о участниках клана
-      /clan disband - распустить клан
-      /clan description <description> - установить описание клана
-      /clan officer <name> - назначить оффицера
-      /clan unofficer <name> - отменить оффицера
-
-
-      /clan remove - technical command
-      /clan rename <current_name> <new_name> - переименовать клан
-      /clan setprefix <prefix> - установить префикс клана
-      /clan description <clan_name> <description> - установить описание клана
-      /clan info <clan_name> - получить информацию о клане
-      /clan members <clan_name> - получить информацию о участниках клана
-      /clan kick <clan_name> <player_name> - кикнуть из клана
-  
 permissions:
   clan.remove:
     description: разрешение на удаление клана

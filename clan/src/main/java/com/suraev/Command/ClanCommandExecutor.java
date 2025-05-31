@@ -15,6 +15,7 @@ import com.suraev.Command.LeaveClan;
 import com.suraev.Command.Admin.RemoveClan;
 import com.suraev.Entity.Role;
 import org.bukkit.entity.Player;
+import com.suraev.Command.Player.ClanList;
 
 public class ClanCommandExecutor implements CommandExecutor{
     private final ClanManager clanManager;
@@ -66,6 +67,10 @@ public class ClanCommandExecutor implements CommandExecutor{
             if(clanManager.hasPermission(player, Role.LEADER)) {
                 return new DeofficerClan(clanManager).onCommand(sender, command, label, args);
             }
+        case "help":
+            return new HelpClan().onCommand(sender, command, label, args);
+        case "list":
+            return new ClanList(clanManager).onCommand(sender, command, label, args);
         default:
             sender.sendMessage("Неверная подкоманда: используйте /clan help для получения списка команд");
             return false;

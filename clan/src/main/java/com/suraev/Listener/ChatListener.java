@@ -25,7 +25,7 @@ public class ChatListener implements Listener {
             String playerName = player.getDisplayName();
             String message = event.getMessage();
 
-            event.setFormat("<" + clanName + "> " + playerName + " §7:§f" + message);
+            event.setFormat("<" + clanName + "> " + playerName + "§7:§f " + message);
         }
     }
 }

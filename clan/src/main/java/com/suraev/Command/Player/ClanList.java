@@ -54,6 +54,10 @@ public class ClanList implements CommandExecutor {
             
 
             Component message = Component.text("Список кланов: ").color(NamedTextColor.AQUA);
+            message = message.append(Component.newline())
+            .append(Component.text("ID клана").color(NamedTextColor.GOLD))
+            .append(Component.text("~~~").color(NamedTextColor.GOLD))
+            .append(Component.text("Название клана").color(NamedTextColor.AQUA));
 
             for(ClanInfo clanInfo : clansInfo) {
                 message = message.append(Component.newline().append(clanInfo.toComponent()));

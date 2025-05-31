@@ -19,7 +19,7 @@ public class ClanInfo {
     
 
     public Component toComponent() {
-        Component component = Component.text(id+" ").color(NamedTextColor.GOLD)
+        Component component = Component.text(id+", ").color(NamedTextColor.GOLD)
         .append(Component.text(title).color(NamedTextColor.AQUA));
 
         return component;

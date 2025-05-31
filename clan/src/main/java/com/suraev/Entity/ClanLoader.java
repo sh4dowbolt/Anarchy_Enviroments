@@ -11,12 +11,17 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
+import com.google.gson.GsonBuilder;
+import org.bukkit.Location;
+import com.suraev.Adapter.LocationTypeAdapter;
 
 @Getter
 public final class ClanLoader {
 
     private Map<Long, Clan> clans = new HashMap<>();
-    private Gson gson = new Gson();
+    private Gson gson = new GsonBuilder()
+        .registerTypeAdapter(Location.class, new LocationTypeAdapter())
+        .create();
     private File clansFile;
     private File lastClanIdFile;
     private Long lastClanId;

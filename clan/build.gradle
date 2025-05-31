@@ -25,6 +25,7 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT")
     compileOnly("de.tr7zw:item-nbt-api-plugin:2.13.2")
     compileOnly("org.projectlombok:lombok:1.18.36")
+    compileOnly("com.google.code.gson:gson:2.11.0")
     compileOnly files("libs/EssentialsX-2.21.0.jar")
     annotationProcessor("org.projectlombok:lombok:1.18.36")
 }

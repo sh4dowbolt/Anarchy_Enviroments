@@ -80,9 +80,11 @@ public class ClanCommandExecutor implements CommandExecutor{
         case "home":
             return new HomeClan(clanManager,ess).onCommand(sender, command, label, args);
         case "sethome":
-            return new HomeSetClan(clanManager).onCommand(sender, command, label, args);
+            if(clanManager.hasPermission(player, Role.LEADER)) {
+                return new HomeSetClan(clanManager).onCommand(sender, command, label, args);
+            }
         default:
-            sender.sendMessage("Неверная подкоманда: используйте /clan help для получения списка команд");
+            sender.sendMessage("§c§lНеизвестная подкоманда: используйте §6/clan help §cдля получения списка команд");
             return false;
        }
     }

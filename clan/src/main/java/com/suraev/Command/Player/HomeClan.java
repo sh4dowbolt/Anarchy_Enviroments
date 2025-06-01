@@ -30,7 +30,8 @@ public class HomeClan implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if(sender instanceof Player) {
+        if(sender instanceof Player) 
+        {
             Player player = (Player) sender;
      
             User user = ess.getUser(player);
@@ -62,19 +63,23 @@ public class HomeClan implements CommandExecutor {
 
             future.thenAccept(success -> {
                 if(success) {
-                    player.sendMessage("&aВы были телепортированы на точку респавна клана");
+                    player.sendMessage("§aВы были телепортированы на точку респавна клана");
                 } else {
-                    player.sendMessage("&cТелепорт отменена");
+                    player.sendMessage("§cТелепорт отменена");
                 }
             }).exceptionally(e -> {
-                player.sendMessage("&cОшибка при телепортировании на точку респавна клана");
+                player.sendMessage("§cОшибка при телепортировании на точку респавна клана");
                 return null;
             });
         }  catch (Exception e) {
-            player.sendMessage("&cОшибка: " + e.getMessage());
+            player.sendMessage("§cОшибка: " + e.getMessage());
             return true;
         }
 
         return false;
+        }
+        sender.sendMessage("§cЭта команда может использоваться только в игре");
+        return true;
     }
 }
+

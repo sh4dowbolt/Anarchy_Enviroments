@@ -23,7 +23,7 @@ public class OfficerClan implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player player) {
-           
+           if(args.length == 2) {
              if(args.length > 2) {
                 player.sendMessage("§cУказаны лишние аргументы: используй §6/clan officer <playerName>");
                 return true;
@@ -55,9 +55,11 @@ public class OfficerClan implements CommandExecutor {
             target.sendMessage("§aВы были назначены офицером клана " + clan.getTitle() + " лидером клана " + player.getDisplayName());
             return true;
                 
-
             }
+            player.sendMessage("§cУказаны лишние аргументы: используй §6/clan officer <playerName>");
+            return false;
         }
+        sender.sendMessage("§cЭта команда доступна только для игроков");
         return false;
     }
 }

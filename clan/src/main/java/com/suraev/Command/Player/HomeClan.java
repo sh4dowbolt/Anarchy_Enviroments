@@ -12,12 +12,9 @@ import com.suraev.Entity.Clan;
 import com.suraev.Entity.ClanManager;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
-
 import org.bukkit.Location;
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.AsyncTeleport;
-
-
 
 
 
@@ -59,21 +56,25 @@ public class HomeClan implements CommandExecutor {
 
             CompletableFuture<Boolean> future = new CompletableFuture<>();
             
-            AsyncTeleport asyncTeleport = user.getAsyncTeleport();
-            
-            asyncTeleport.teleport(location, null, TeleportCause.PLUGIN, future);
+            try {
+                AsyncTeleport asyncTeleport = user.getAsyncTeleport();
+                asyncTeleport.teleport(location, null, TeleportCause.PLUGIN, future);
 
             future.thenAccept(success -> {
                 if(success) {
-                    player.sendMessage("Вы были телепортированы на точку респавна клана");
+                    player.sendMessage("&aВы были телепортированы на точку респавна клана");
                 } else {
-                    player.sendMessage("Не удалось телепортировать вас на точку респавна клана");
+                    player.sendMessage("&cТелепорт отменена");
                 }
             }).exceptionally(e -> {
-                player.sendMessage("Не удалось телепортировать вас на точку респавна клана");
+                player.sendMessage("&cОшибка при телепортировании на точку респавна клана");
                 return null;
             });
+        }  catch (Exception e) {
+            player.sendMessage("&cОшибка: " + e.getMessage());
+            return true;
         }
+
         return false;
     }
 }

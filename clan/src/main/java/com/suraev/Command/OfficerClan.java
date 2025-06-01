@@ -41,7 +41,7 @@ public class OfficerClan implements CommandExecutor {
                 player.sendMessage("§cИгрок с таким именем не найден");
                 return true;
             }
-            Optional<Clan> optionalClan = clanManager.getClanByPlayer(target);)
+            Optional<Clan> optionalClan = clanManager.getClanByPlayer(target);
 
             if(optionalClan.isEmpty()) {
                 player.sendMessage("§cИгрок не в клане");

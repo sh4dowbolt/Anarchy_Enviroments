@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.bukkit.Bukkit;
 
 public class ClanTabCompleter implements TabCompleter {
 
@@ -29,6 +30,11 @@ public class ClanTabCompleter implements TabCompleter {
                 completions.add("officer");
                 completions.add("unofficer");
                 completions.add("help");
+            }
+            if(args.length == 2) {
+                for(Player player : Bukkit.getOnlinePlayers()) {
+                    completions.add(player.getName());
+                }
             }
             if(sender.hasPermission("clan.remove")) {
                 completions.add("remove");

@@ -22,17 +22,17 @@ public class ClanInfo implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(args.length != 1) {
-            sender.sendMessage("Использование: /clan info ");
+            sender.sendMessage("§cИспользование: §6/clan info ");
             return true;
         }
 
         if(!(sender instanceof Player player)) {
-            sender.sendMessage("Команда доступна только для игроков");
+            sender.sendMessage("§cКоманда доступна только для игроков");
             return true;
         }
         Optional<Clan> optionalClan = clanManager.getClanByPlayer(player);
         if(optionalClan.isEmpty()) {
-            sender.sendMessage("Для получения информации о клане, вы должны быть в клане");
+            sender.sendMessage("§cДля получения информации о клане, вы должны быть в клане");
             return true;
         }
 
@@ -45,7 +45,7 @@ public class ClanInfo implements CommandExecutor {
 
         message.append("Лидер клана: ").append(clan.getOwner().getName()).append("\n");
     
-        sender.sendMessage(message.toString());
+        sender.sendMessage(message.toString()); 
         return true;
     }
 }

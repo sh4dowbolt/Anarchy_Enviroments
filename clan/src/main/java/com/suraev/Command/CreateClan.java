@@ -24,20 +24,20 @@ public class CreateClan implements CommandExecutor {
         if (commandSender instanceof Player player) {
 
             if (strings.length <2) {
-                player.sendMessage("Использование: /clan create <name>");
+                player.sendMessage("§cИспользование: §6/clan create <name>");
                 return true;
             }
 
             String subCommand = strings[0];
             if(!subCommand.equalsIgnoreCase("create")) {
-                player.sendMessage("Неизвестная подкомада, используй: /clan create <name> ");
+                player.sendMessage("§cНеизвестная подкомада, используй: §6/clan create <name> ");
                 return true;
             }
 
             String titleOfClan= strings[1];
             try {
                 clanManager.createClan(player,titleOfClan);
-                player.sendMessage("Клан успешно создан: "+titleOfClan);
+                player.sendMessage("§aКлан успешно создан: "+titleOfClan);
             } catch (PlayerAlreadyInClanException  e) {
                 player.sendMessage(e.getMessage());
             } catch (ClanNameAlreadyExistedException e) {
@@ -46,7 +46,7 @@ public class CreateClan implements CommandExecutor {
 
             return true;
         }
-        commandSender.sendMessage("Команда только для игроков");
+        commandSender.sendMessage("§cКоманда только для игроков");
         return true;
     }
 }

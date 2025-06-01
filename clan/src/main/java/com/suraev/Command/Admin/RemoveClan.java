@@ -20,29 +20,29 @@ public class RemoveClan implements CommandExecutor {
         if(sender instanceof Player player) {
             
             if(!player.hasPermission("clan.remove")) {
-                player.sendMessage("У вас нет прав на удаление клана");
+                player.sendMessage("§cУ вас нет прав на удаление клана");
                 return true;
             }
             if(args.length == 1) {
-                player.sendMessage("Укажите имя клана");
+                player.sendMessage("§cУкажите имя клана");
                 return true;
             }
             if(args.length > 2) {
-                player.sendMessage("Указаны лишние аргументы: используй /clan remove");
+                player.sendMessage("§cУказаны лишние аргументы: используй §6/clan remove");
                 return true;
             }
             if(args[0].equalsIgnoreCase("remove")) {
                 String clanName = args[1];
                 if(clanManager.getClanByName(clanName).isEmpty()) {
-                    player.sendMessage("Клан с таким именем не найден");
+                    player.sendMessage("§cКлан с таким именем не найден");
                     return true;
                 }
                 clanManager.removeClanByName(clanName);
-                player.sendMessage("Клан успешно удален");
+                player.sendMessage("§aКлан успешно удален");
                 return true;              
             }
         }   
-        sender.sendMessage("Команда доступна только для игроков");
+        sender.sendMessage("§cКоманда доступна только для игроков");
         return true;
     }   
 

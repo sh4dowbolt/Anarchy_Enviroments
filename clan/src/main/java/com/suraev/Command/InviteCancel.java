@@ -23,18 +23,18 @@ public class InviteCancel implements CommandExecutor {
         if(sender instanceof Player player) {
             int argCommandLength = args.length;
             if(argCommandLength == 0) {
-                player.sendMessage("Неверно указана подкоманда: используй /help для получения списка команд");
+                player.sendMessage("§cНеверно указана подкоманда: используй §6/help §cдля получения списка команд");
                 return true;
             }
             if(argCommandLength > 1) {
-                player.sendMessage("Указаны лишние аргументы: используй /clan cancel");
+                player.sendMessage("§cУказаны лишние аргументы: используй §6/clan cancel");
                 return true;
             }
             if(args[0].equalsIgnoreCase("cancel")) {
                 clanInviteManager.removeInvite(player);
                 return true;
             }else{
-                player.sendMessage("У вас нет приглашения в клан");
+                player.sendMessage("§cУ вас нет приглашения в клан");
                 return true;
             }
 

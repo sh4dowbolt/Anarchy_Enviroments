@@ -28,7 +28,7 @@ public class MembersClan implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player player) {
             if(args.length != 1) {
-                player.sendMessage("Использование: /clan members <name>");
+                player.sendMessage("§cИспользование: §6/clan members <name>");
                 return true;
             }
             
@@ -36,7 +36,7 @@ public class MembersClan implements CommandExecutor {
                 Optional<Clan> optionalClan = clanManager.getClanByPlayer(player);
                 
                 if(optionalClan.isEmpty()) {
-                    player.sendMessage("Вы не находитесь в клане");
+                    player.sendMessage("§cВы не находитесь в клане");
                     return true;
                 }
                 Clan clan = optionalClan.get();
@@ -62,13 +62,13 @@ public class MembersClan implements CommandExecutor {
                 .append(Component.newline())
                 .append(officersMessage)
                 .append(Component.newline())
-                .append(membersMessage);
+                .append(membersMessage);    
 
                 player.sendMessage(message);
                 return true;
             }
         }
-        sender.sendMessage("Команда доступна только для игроков");
+        sender.sendMessage("§cКоманда доступна только для игроков");
         return true;
 
      

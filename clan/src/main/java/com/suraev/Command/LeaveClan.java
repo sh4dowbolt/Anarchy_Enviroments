@@ -23,20 +23,20 @@ public class LeaveClan implements CommandExecutor {
             if(sender instanceof Player player) {
                 Optional<Clan> optionalClan = clanManager.getClanByPlayer(player);
                 if(optionalClan.isEmpty()) {
-                    player.sendMessage("Вы не состоите в клане");
+                    player.sendMessage("§cВы не состоите в клане");
                     return true;
                 }
                 Clan clan = optionalClan.get();
                 ClanMember clanMember = new ClanMember(player);
                 if(clan.isPlayerClanLeader(clanMember)) {
-                    player.sendMessage("Вы не можете покинуть клан, пока являетесь лидером");
+                    player.sendMessage("§cВы не можете покинуть клан, пока являетесь лидером");
                     return true;
                 }
                 clanManager.removeClanMemberFromClan(clan.getTitle(), player);
-                player.sendMessage("Вы покинули клан "+clan.getTitle());
+                player.sendMessage("§aВы покинули клан "+clan.getTitle());
                 return true;
             }
-            sender.sendMessage("Только игроки могут покинуть клан");
+            sender.sendMessage("§cТолько игроки могут покинуть клан");
             return true;
      }
 }

@@ -27,54 +27,54 @@ public class InviteClan implements CommandExecutor {
         if(commandSender instanceof Player inviter) {
 
             if(strings.length<2) {
-                inviter.sendMessage("Использование: /clan invite <nickName>");
+                inviter.sendMessage("§cИспользование: §6/clan invite <nickName>");
                 return true;
             }
 
             if(strings.length>2) {
-                inviter.sendMessage("Указали лишние аргументы, используй: /clan invite <nickName>" );
+                inviter.sendMessage("§cУказали лишние аргументы, используй: §6/clan invite <nickName>" );
                 return true;
             }
             //TODO: проверить, является ли игрок лидером или офицером клана || !clanManager.isPlayerOfficer(inviter)
             if(!clanManager.isPlayerClanLeader(inviter) ) {
-                inviter.sendMessage("Для приглашения в клан, вы должны быть лидером или офицером клана");
+                inviter.sendMessage("§cДля приглашения в клан, вы должны быть лидером или офицером клана");
                 return true;
             }
 
             Optional<Clan> clanToInvite = clanManager.getClanByPlayer(inviter);
 
             if(clanToInvite.isEmpty()) {
-                inviter.sendMessage("Возникли проблемы с кланом, обратитесь к администратору");
+                inviter.sendMessage("§cВозникли проблемы с кланом, обратитесь к администратору");
                 return true;
             }
 
             String subCommand = strings[0];
             if(!subCommand.equalsIgnoreCase("invite")) {
-                inviter.sendMessage("Неизвестная подкомада, используй: /clan invite <nickName> ");
+                inviter.sendMessage("§cНеизвестная подкомада, используй: §6/clan invite <nickName> ");
                 return true;
             }
 
             String nickName= strings[1];
             Player targetPlayer = commandSender.getServer().getPlayer(nickName);
             if(targetPlayer == null) {
-                inviter.sendMessage("Игрок "+nickName+" оффлайн или его не существует!");
+                inviter.sendMessage("§cИгрок "+nickName+" оффлайн или его не существует!");
                 return true;
             }
             if(inviter.getName().equals(targetPlayer.getName())) {
-                inviter.sendMessage("Вы не можете пригласить себя в клан");
+                inviter.sendMessage("§cВы не можете пригласить себя в клан");
                 return true;
             }
 
 
             if(clanInviteManager.createInvite(clanToInvite.get(), inviter, targetPlayer)){
-                inviter.sendMessage("Приглашение отправлено игроку "+targetPlayer.getName());
-                targetPlayer.sendMessage("Вас пригласили в клан "+clanToInvite.get().getTitle()+" Чтобы принять приглашение," +
-                        "используйте команду /clan accept. Для отказа используйте команду /clan cancel");
+                inviter.sendMessage("§aПриглашение отправлено игроку "+targetPlayer.getName());
+                targetPlayer.sendMessage("§aВас пригласили в клан "+clanToInvite.get().getTitle()+" Чтобы принять приглашение," +
+                        "используйте команду §6/clan accept. Для отказа используйте команду §6/clan cancel");
                 return true;
             }
 
         } else {
-            commandSender.sendMessage("Команда доступна только для игроков");
+            commandSender.sendMessage("§cКоманда доступна только для игроков");
         return true;
     }
     return false;

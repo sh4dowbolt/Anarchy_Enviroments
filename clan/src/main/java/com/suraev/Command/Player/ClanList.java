@@ -24,7 +24,7 @@ public class ClanList implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         
         if(args.length >2) {
-            sender.sendMessage("Проверьте правильность ввода команды: /clan list <страница>");
+            sender.sendMessage("§cПроверьте правильность ввода команды: §6/clan list <страница>");
             return true;
         }
 
@@ -40,7 +40,7 @@ public class ClanList implements CommandExecutor {
                 try {
                     page = Integer.parseInt(args[1]);
                 } catch (NumberFormatException e) {
-                    sender.sendMessage("Используй: /clan list <страница>");
+                    sender.sendMessage("§cИспользуй: §6/clan list <страница>");
                     return true;
                 }
             }
@@ -48,7 +48,7 @@ public class ClanList implements CommandExecutor {
             List<ClanInfo> clansInfo = clanManager.getClansInfo(page, pageSize);
 
             if(clansInfo.isEmpty()) {
-                sender.sendMessage("Страница " + page + " не найдена");
+                sender.sendMessage("§cСтраница " + page + " не найдена");
                 return true;
             }
             
@@ -65,7 +65,7 @@ public class ClanList implements CommandExecutor {
 
             if(page < totalPages) {
                 message = message.append(Component.newline()
-                .append(Component.text("Используйте /clan list "+(page+1)+"для перехода на другую страницу").color(NamedTextColor.AQUA)));
+                .append(Component.text("§cИспользуйте §6/clan list "+(page+1)+" §cдля перехода на другую страницу").color(NamedTextColor.AQUA)));
             }
 
             player.sendMessage(message);

@@ -23,23 +23,23 @@ public class KickFromClan implements CommandExecutor{
         if(sender instanceof Player player) {
 
             if(args.length != 2) {
-                player.sendMessage("Используй: /clan kick <ник>");
+                player.sendMessage("§cИспользуй: §6/clan kick <ник>");
                 return true;
             }
             String subCommand = args[0];
             if(!subCommand.equalsIgnoreCase("kick")) {
-                player.sendMessage("Неверно указана подкоманда: используй /clan kick для кика из клана");
+                player.sendMessage("§cНеверно указана подкоманда: используй §6/clan kick для кика из клана");
                 return true;
             }
             String playerName = args[1];
             Player targetPlayer = Bukkit.getPlayer(playerName);
             if(targetPlayer == null) {
-                player.sendMessage("Игрок " + playerName + " не найден");
+                player.sendMessage("§cИгрок " + playerName + " не найден");
                 return true;
             }
             Optional<Clan> optionalClan = clanManager.getClanByPlayer(player);
             if(optionalClan.isEmpty()) {
-                player.sendMessage("Вы не состоите в клане");
+                player.sendMessage("§cВы не состоите в клане");
                 return true;
             }
             
@@ -52,23 +52,23 @@ public class KickFromClan implements CommandExecutor{
             if(clan.isPlayerClanLeader(currentClanMember)) {       
 
             if(clanLeader.equals(targetClanMember)) {
-                player.sendMessage("Вы не можете кикнуть себя из клана, прежде правозгласите нового лидера");
+                player.sendMessage("§cВы не можете кикнуть себя из клана, прежде правозгласите нового лидера");
                 return true;
             }
 
             if(clan.isPlayerInClan(targetClanMember)) {
                 clanManager.removeClanMemberFromClan(playerName, player);
-                player.sendMessage("Игрок " + playerName + " успешно кикнут из клана"+clan.getTitle());
-                targetPlayer.sendMessage("Вы были кикнуты из клана "+clan.getTitle());
+                player.sendMessage("§aИгрок " + playerName + " успешно кикнут из клана"+clan.getTitle());
+                targetPlayer.sendMessage("§aВы были кикнуты из клана "+clan.getTitle());
                 return true;
             }
-            player.sendMessage("Указанный игрок не состоит в клане");
+            player.sendMessage("§cУказанный игрок не состоит в клане");
             return true;
         }
-        sender.sendMessage("Для использования команды необходимо быть лидером клана");
+        sender.sendMessage("§cДля использования команды необходимо быть лидером клана");
         return true;
     }
-    sender.sendMessage("Команда доступна только для игроков");
+    sender.sendMessage("§cКоманда доступна только для игроков");
         return true;
 }
 }

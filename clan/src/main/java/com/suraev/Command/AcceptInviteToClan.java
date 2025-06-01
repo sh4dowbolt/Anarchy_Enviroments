@@ -31,25 +31,25 @@ public class AcceptInviteToClan implements CommandExecutor {
             int lengthCommandArguments = strings.length;
 
             if(lengthCommandArguments == 0 ||lengthCommandArguments>1) {
-                player.sendMessage("Укажите подкоманду accept, достаточно ввести /clan accept");
+                player.sendMessage("§cУкажите подкоманду accept, достаточно ввести §6/clan accept");
                 return true;
             }
 
             if(lengthCommandArguments>1) {
-                player.sendMessage("Указали лишние аргументы, достаточно ввести /clan accept");
+                player.sendMessage("§cУказали лишние аргументы, достаточно ввести §6/clan accept");
                 return true;
             }
 
             String acceptString = strings[0];
             if(!acceptString.equalsIgnoreCase("accept")) {
-                player.sendMessage("Проверь, корректно ли ввел подкоманду accept. Должно быть /clan accept");
+                player.sendMessage("§cПроверь, корректно ли ввел подкоманду accept. Должно быть §6/clan accept");
                 return true;
             }
 
             Optional<InviteClanRequest> inviteRequest = clanInviteManager.getInviteRequest(player);
 
             if(!inviteRequest.isPresent()) {
-                player.sendMessage("У вас нет активных предложений");
+                player.sendMessage("§cУ вас нет активных предложений");
                 return true;
             }
 
@@ -59,17 +59,17 @@ public class AcceptInviteToClan implements CommandExecutor {
 
             if(clanInviteManager.removeInvite(player)) {
                 clanManager.addClanMemberToClan(nameOfClan,player);
-                player.sendMessage("Вы приняты в клан "+nameOfClan);
+                player.sendMessage("§aВы приняты в клан "+nameOfClan);
 
                 ClanMember sender = inviteClanRequest.getSender();
                 Player inviter = Bukkit.getPlayer(sender.getUuid());
                 if(inviter!= null) {
-                    inviter.sendMessage("Игрок "+player.getName()+" вступил в клан "+nameOfClan);
+                    inviter.sendMessage("§aИгрок "+player.getName()+" вступил в клан "+nameOfClan);
                 }
             }
             return true;
         }
-        commandSender.sendMessage("Только игрок может пользоваться данной командой");
+        commandSender.sendMessage("§cТолько игрок может пользоваться данной командой");
         return true;
     }
 }

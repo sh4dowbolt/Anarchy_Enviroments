@@ -53,7 +53,10 @@ public class DeofficerClan implements CommandExecutor {
                     target.sendMessage("§aВы были сняты с должности офицера клана " + clan.getTitle() + " лидером клана " + player.getDisplayName());
                     return true;
                 }
+                player.sendMessage("§cУказаны лишние аргументы: используй §6/clan deofficer <playerName>");
+                return false;
             }
+            sender.sendMessage("§cЭта команда доступна только для игроков");
             return false;
         }
     }

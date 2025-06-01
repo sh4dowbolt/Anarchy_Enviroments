@@ -41,13 +41,20 @@ public class OfficerClan implements CommandExecutor {
                 player.sendMessage("§cИгрок с таким именем не найден");
                 return true;
             }
-            Optional<Clan> optionalClan = clanManager.getClanByPlayer(target);
+            Optional<Clan> optionalClan = clanManager.getClanByPlayer(target);)
+
             if(optionalClan.isEmpty()) {
                 player.sendMessage("§cИгрок не в клане");
                 return true;
             }
             Clan clan = optionalClan.get();
             Long clanId = clan.getId();
+
+            if(clanManager.isPlayerClanLeader(player)) {
+                player.sendMessage("§cВы не можете назначить себе офицером, будучи лидером клана");
+                return true;
+            }
+            
             
             clanManager.updateClanMemberRole(clanId, target, Role.OFFICER);
 

@@ -17,6 +17,7 @@ import java.util.Comparator;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 import com.suraev.Entity.DTO.ClanInfo;
+import com.suraev.Exception.InvalidClanNameException;
 
 
 public class ClanManager {
@@ -37,7 +38,7 @@ public class ClanManager {
     }   
     
 
-    public void createClan(Player player,String name) throws PlayerAlreadyInClanException, ClanNameAlreadyExistedException {
+    public void createClan(Player player,String name) throws PlayerAlreadyInClanException, ClanNameAlreadyExistedException, InvalidClanNameException {
 
        if(validateClanName(name)) {
 
@@ -63,7 +64,7 @@ public class ClanManager {
 
         insertClanWithTitle(clan);
     } else {
-            player.sendMessage("Название клана должно быть от 3 до 10 символов");
+            throw new InvalidClanNameException("Название клана должно быть от 3 до 10 символов");
         }
     }
 

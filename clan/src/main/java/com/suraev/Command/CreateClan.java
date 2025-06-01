@@ -9,6 +9,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import com.suraev.Exception.InvalidClanNameException;
 
 
 public class CreateClan implements CommandExecutor {
@@ -37,10 +38,12 @@ public class CreateClan implements CommandExecutor {
             String titleOfClan= strings[1];
             try {
                 clanManager.createClan(player,titleOfClan);
-                player.sendMessage("§aКлан успешно создан: "+titleOfClan);
+                player.sendMessage("§aКлан успешно создан: §6"+titleOfClan);
             } catch (PlayerAlreadyInClanException  e) {
                 player.sendMessage(e.getMessage());
             } catch (ClanNameAlreadyExistedException e) {
+                player.sendMessage(e.getMessage());
+            } catch (InvalidClanNameException e) {
                 player.sendMessage(e.getMessage());
             }
 

@@ -22,34 +22,31 @@ public class DeofficerClan implements CommandExecutor {
         @Override
         public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
             if(sender instanceof Player player) {
-                if(args.length == 1) {
+                if(args.length == 2) {
                  if(args.length > 2) {
-                    player.sendMessage("Указаны лишние аргументы: используй /clan deofficer <playerName>");
+                    player.sendMessage("§cУказаны лишние аргументы: используй §6/clan deofficer <playerName>");
                     return true;
                  }   
-                    if(args[0].equalsIgnoreCase("deofficer")) {
-    
-                        String playerName = args[1];
-                        Player target = Bukkit.getPlayer(playerName);
-                        if(target == null) {
-                            player.sendMessage("Игрок с таким именем не найден");
-                            return true;
-                        }
-                        Optional<Clan> optionalClan = clanManager.getClanByPlayer(target);
-                        if(optionalClan.isEmpty()) {
-                            player.sendMessage("Игрок не в клане");
-                            return true;
-                        }
-                        Clan clan = optionalClan.get();
-                        Long clanId = clan.getId();
-                        
-                        clanManager.updateClanMemberRole(clanId, target, Role.MEMBER);
-    
-                        player.sendMessage("Вы сняли " + target.getName() + " с должности офицера клана");
-                        target.sendMessage("Вы были сняты с должности офицера клана " + clan.getTitle() + " лидером клана " + player.getDisplayName());
+        
+                    String playerName = args[1];
+                    Player target = Bukkit.getPlayer(playerName);
+                    if(target == null) {
+                        player.sendMessage("§cИгрок с таким именем не найден");
                         return true;
                     }
-    
+                    Optional<Clan> optionalClan = clanManager.getClanByPlayer(target);
+                    if(optionalClan.isEmpty()) {
+                        player.sendMessage("§c§lИгрок не в клане");
+                        return true;
+                    }
+                    Clan clan = optionalClan.get();
+                    Long clanId = clan.getId();
+                    
+                    clanManager.updateClanMemberRole(clanId, target, Role.MEMBER);
+
+                    player.sendMessage("§aВы сняли " + target.getName() + " с должности офицера клана");
+                    target.sendMessage("§aВы были сняты с должности офицера клана " + clan.getTitle() + " лидером клана " + player.getDisplayName());
+                    return true;
                 }
             }
             return false;

@@ -41,6 +41,11 @@ public class DeofficerClan implements CommandExecutor {
                     }
                     Clan clan = optionalClan.get();
                     Long clanId = clan.getId();
+
+                    if(clanManager.isPlayerClanLeader(player)) {
+                        player.sendMessage("§cВы не можете снять с должности офицера, будучи лидером клана");
+                        return true;
+                    }
                     
                     clanManager.updateClanMemberRole(clanId, target, Role.MEMBER);
 

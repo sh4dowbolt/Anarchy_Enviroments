@@ -18,14 +18,18 @@ import org.bukkit.entity.Player;
 import com.suraev.Command.Player.ClanList;
 import com.suraev.Command.Player.HomeClan;
 import com.suraev.Command.Player.HomeSetClan;
+import com.earth2me.essentials.Essentials;
+
 
 public class ClanCommandExecutor implements CommandExecutor{
     private final ClanManager clanManager;
     private final ClanInviteManager clanInviteManager;
+    private final Essentials ess;
 
-    public ClanCommandExecutor(ClanManager clanManager, ClanInviteManager clanInviteManager) {
+    public ClanCommandExecutor(ClanManager clanManager, ClanInviteManager clanInviteManager, Essentials ess) {
         this.clanManager = clanManager;
         this.clanInviteManager = clanInviteManager;
+        this.ess = ess;
     }
 
     @Override
@@ -74,7 +78,7 @@ public class ClanCommandExecutor implements CommandExecutor{
         case "list":
             return new ClanList(clanManager).onCommand(sender, command, label, args);
         case "home":
-            return new HomeClan(clanManager).onCommand(sender, command, label, args);
+            return new HomeClan(clanManager,ess).onCommand(sender, command, label, args);
         case "sethome":
             return new HomeSetClan(clanManager).onCommand(sender, command, label, args);
         default:

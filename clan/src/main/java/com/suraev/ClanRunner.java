@@ -32,16 +32,7 @@ public class ClanRunner extends JavaPlugin implements Listener {
 
         getServer().getPluginManager().registerEvents(new ChatListener(clanManager), this);
 
-        PluginCommand clanCommand = getCommand("clan");
-        if(clanCommand != null) {
-            clanCommand.setExecutor(new ClanCommandExecutor(clanManager,clanInviteManager));
-        } else {
-            getLogger().severe("The clan command is not found");
-        }
-        getCommand("clan").setTabCompleter(new ClanTabCompleter());
-        loader.loadClans();
-
-
+       
         Plugin essentialsPlugin = getServer().getPluginManager().getPlugin("Essentials");
         if(essentialsPlugin != null) {
             getLogger().info("Essentials plugin found");
@@ -49,6 +40,16 @@ public class ClanRunner extends JavaPlugin implements Listener {
         } else {
             getLogger().severe("Essentials plugin not found");
         }
+
+        PluginCommand clanCommand = getCommand("clan");
+        if(clanCommand != null) {
+            clanCommand.setExecutor(new ClanCommandExecutor(clanManager,clanInviteManager,essentials));
+        } else {
+            getLogger().severe("The clan command is not found");
+        }
+        getCommand("clan").setTabCompleter(new ClanTabCompleter());
+
+
 
         getLogger().info("Finish loading");
     }

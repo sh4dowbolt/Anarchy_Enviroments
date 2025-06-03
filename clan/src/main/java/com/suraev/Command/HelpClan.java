@@ -16,7 +16,7 @@ public class HelpClan implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         List<String> commands = new ArrayList<>();
-        commands.add("§c§lСправка по командам клана\n");
+        commands.add("§c§lСправка по командам клана");
         commands.add("§6/clan create <name> - §7создать клан");
         commands.add("§6/clan invite <name> - §7пригласить в клан");
         commands.add("§6/clan accept - §7принять приглашение");
@@ -36,7 +36,7 @@ public class HelpClan implements CommandExecutor {
 
             if(args[0].equalsIgnoreCase("help")) {
                 int page=1;
-                int pageSize = 10;
+                int pageSize = 8;
                 int totalPages = (int) Math.ceil( (double)commands.size()/pageSize);
 
                 if(args.length == 2) {
@@ -49,24 +49,22 @@ public class HelpClan implements CommandExecutor {
                 }
 
                 if(player.hasPermission("clan.remove")) {
-                    commands.add("§7/clan remove <name> - удалить клан\n");
+                    commands.add("§7/clan remove <name> - удалить клан");
                 }
 
                 List<String> pageCommands = commands
-                .subList((page-1)*10, Math.min(page*10, commands.size()));
+                .subList((page-1)*pageSize, Math.min(page*pageSize, commands.size()));
 
-                Component message = Component.text("§c§lСправка по командам клана\n");
-
+                Component message = Component.empty();
                 for(String commandText : pageCommands) {
-                    message = message.append(Component.text(commandText).color(NamedTextColor.AQUA));
+                    message = message.append(Component.text(commandText).color(NamedTextColor.AQUA))
+                    .append(Component.newline());
                 }
 
                 if(page < totalPages) {
                     message = message.append(Component.newline())
                     .append(Component.text("§cДля просмотра следующей страницы используй: §6/clan help " + (page+1)).color(NamedTextColor.AQUA));
                 }
-
-              
 
                 player.sendMessage(message);
                 return true;

@@ -132,20 +132,20 @@ public class ClanManager {
         Optional<Clan> optionalClan = clans.values().stream().filter(clan -> clan.isPlayerInClan(clanMember)).findFirst();
         if(optionalClan.isPresent()) {
             clans.remove(optionalClan.get().getId());
+            isCacheDirty = true;
             return true;
         }
-        isCacheDirty = true;
         return false;
     }
 
     public boolean removeClanById(Long clanId) {
-        Optional<Clan> optionalClan =   clans.values().stream()
+        Optional<Clan> optionalClan = clans.values().stream()
         .filter(clan -> clan.getId().equals(clanId)).findFirst();
         if(optionalClan.isPresent()) {
             clans.remove(optionalClan.get().getId());
+            isCacheDirty = true;
             return true;
         }
-        isCacheDirty = true;
         return false;
     }
   

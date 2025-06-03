@@ -32,12 +32,12 @@ public class RemoveClan implements CommandExecutor {
                 return true;
             }
             if(args[0].equalsIgnoreCase("remove")) {
-                String clanName = args[1];
-                if(clanManager.getClanByName(clanName).isEmpty()) {
+                Long clanId = Long.parseLong(args[1]);
+                if(clanManager.getClanById(clanId).isEmpty()) {
                     player.sendMessage("§cКлан с таким именем не найден");
                     return true;
                 }
-                clanManager.removeClanByName(clanName);
+                clanManager.removeClanById(clanId);
                 player.sendMessage("§aКлан успешно удален");
                 return true;              
             }

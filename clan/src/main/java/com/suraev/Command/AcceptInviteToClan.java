@@ -54,17 +54,16 @@ public class AcceptInviteToClan implements CommandExecutor {
             }
 
             InviteClanRequest inviteClanRequest = inviteRequest.get();
-            String nameOfClan = inviteClanRequest.getNameOfClan();
-
+            Clan clan = inviteClanRequest.getClan();
 
             if(clanInviteManager.removeInvite(player)) {
-                clanManager.addClanMemberToClan(nameOfClan,player);
-                player.sendMessage("§aВы приняты в клан "+nameOfClan);
+                clanManager.addClanMemberToClan(clan.getId(),player);
+                player.sendMessage("§aВы приняты в клан §6"+clan.getTitle());
 
                 ClanMember sender = inviteClanRequest.getSender();
                 Player inviter = Bukkit.getPlayer(sender.getUuid());
                 if(inviter!= null) {
-                    inviter.sendMessage("§aИгрок "+player.getName()+" вступил в клан "+nameOfClan);
+                    inviter.sendMessage("§aИгрок §6"+player.getName()+" §aвступил в клан §6 "+clan.getTitle());
                 }
             }
             return true;

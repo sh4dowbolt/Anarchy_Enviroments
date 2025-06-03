@@ -67,9 +67,10 @@ public class InviteClan implements CommandExecutor {
 
 
             if(clanInviteManager.createInvite(clanToInvite.get(), inviter, targetPlayer)){
-                inviter.sendMessage("§aПриглашение отправлено игроку "+targetPlayer.getName());
-                targetPlayer.sendMessage("§aВас пригласили в клан "+clanToInvite.get().getTitle()+" Чтобы принять приглашение," +
-                        "используйте команду §6/clan accept. Для отказа используйте команду §6/clan cancel");
+                inviter.sendMessage("§aПриглашение отправлено игроку §6"+targetPlayer.getName());
+                targetPlayer.sendMessage("§aВас пригласили в клан §6"+clanToInvite.get().getTitle()+"\n" +
+                        "§cЧтобы принять приглашение," +
+                        "§cиспользуйте команду §6/clan accept. §cДля отказа используйте команду §6/clan cancel");
                 return true;
             }
 

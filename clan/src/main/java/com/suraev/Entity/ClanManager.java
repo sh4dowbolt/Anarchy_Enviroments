@@ -100,19 +100,22 @@ public class ClanManager {
         return clans.values().stream().filter(clan -> clan.isPlayerInClan(clanMember)).findFirst();
     }
 
-    public Optional<Clan> getClanByName(String name) {
-        return clans.values().stream().filter(clan -> clan.getTitle().equals(name)).findFirst();
+    public Optional<Clan> getClanById(Long id) {
+        return clans.values().stream().filter(clan -> clan.getId().equals(id)).findFirst();
     }
 
-    public boolean addClanMemberToClan(String name,Player player) {
+    public boolean addClanMemberToClan(Long clanId,Player player) {
         ClanMember clanMember = new ClanMember(player);
-        clans.values().stream().filter(clan -> clan.getTitle().equals(name)).findFirst().ifPresent(clan -> clan.addMember(clanMember));
+        clans.values().stream().filter(clan -> clan.getId().equals(clanId)).findFirst().ifPresent(clan -> clan.addMember(clanMember));
         return true;
     }
     
-    public boolean removeClanMemberFromClan(String clanName,Player player) {
+    public boolean removeClanMemberFromClan(Long clanId,Player player) {
         ClanMember clanMember = new ClanMember(player);
-        clans.values().stream().filter(clan -> clan.getTitle().equals(clanName)).findFirst().ifPresent(clan -> clan.removeMember(clanMember));
+        clans.values().stream().filter(clan -> clan.getId().equals(clanId)).findFirst().map(clan -> {
+            clan.removeMember(clanMember);
+            return true;
+        }).orElse(false);
         return true;
     }
 
@@ -135,9 +138,9 @@ public class ClanManager {
         return false;
     }
 
-    public boolean removeClanByName(String clanName) {
+    public boolean removeClanById(Long clanId) {
         Optional<Clan> optionalClan =   clans.values().stream()
-        .filter(clan -> clan.getTitle().equals(clanName)).findFirst();
+        .filter(clan -> clan.getId().equals(clanId)).findFirst();
         if(optionalClan.isPresent()) {
             clans.remove(optionalClan.get().getId());
             return true;

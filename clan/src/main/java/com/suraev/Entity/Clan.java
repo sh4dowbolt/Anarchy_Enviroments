@@ -16,6 +16,7 @@ public class Clan {
     private Location clanHome;
 
 
+
     public synchronized String getTitle() {
         return title;
     }
@@ -39,7 +40,10 @@ public class Clan {
         members.add(player);
     }
 
-    public void removeMember(ClanMember player) {
+    public synchronized void removeMember(ClanMember player) {
+        if(members == null) {
+            members = new ArrayList<>();
+        }
         members.remove(player);
     }
 

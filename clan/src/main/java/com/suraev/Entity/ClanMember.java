@@ -35,12 +35,12 @@ public class ClanMember {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         ClanMember that = (ClanMember) object;
-        return Objects.equals(name, that.name) && Objects.equals(uuid, that.uuid);
+        return Objects.equals(uuid, that.uuid);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, uuid);
+        return Objects.hash(uuid);
     }
 
     public boolean isOnline() {

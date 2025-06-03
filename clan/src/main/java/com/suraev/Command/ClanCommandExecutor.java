@@ -36,7 +36,7 @@ public class ClanCommandExecutor implements CommandExecutor{
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
      
        if (args.length == 0) {
-        sender.sendMessage("Используйте /clan help для получения списка команд");
+        sender.sendMessage("§cИспользуйте §6/clan help §cдля получения списка команд");
         return true;
        }
 
@@ -84,7 +84,7 @@ public class ClanCommandExecutor implements CommandExecutor{
                 return new HomeSetClan(clanManager).onCommand(sender, command, label, args);
             }
         default:
-            sender.sendMessage("§c§lНеизвестная подкоманда: используйте §6/clan help §cдля получения списка команд");
+            sender.sendMessage("§cНеизвестная подкоманда: используйте §6/clan help §cдля получения списка команд");
             return false;
        }
     }

@@ -50,7 +50,7 @@ public class OfficerClan implements CommandExecutor {
             Clan clan = optionalClan.get();
             Long clanId = clan.getId();
 
-            if(clanManager.isPlayerClanLeader(player)) {
+            if(clanManager.isPlayerClanLeader(target)) {
                 player.sendMessage("§cВы не можете назначить себе офицером, будучи лидером клана");
                 return true;
             }

@@ -40,11 +40,11 @@ public class CreateClan implements CommandExecutor {
                 clanManager.createClan(player,titleOfClan);
                 player.sendMessage("§aКлан успешно создан: §6"+titleOfClan);
             } catch (PlayerAlreadyInClanException  e) {
-                player.sendMessage(e.getMessage());
+                player.sendMessage("§c"+e.getMessage());
             } catch (ClanNameAlreadyExistedException e) {
-                player.sendMessage(e.getMessage());
+                player.sendMessage("§c"+e.getMessage());
             } catch (InvalidClanNameException e) {
-                player.sendMessage(e.getMessage());
+                player.sendMessage("§c"+e.getMessage());
             }
 
             return true;

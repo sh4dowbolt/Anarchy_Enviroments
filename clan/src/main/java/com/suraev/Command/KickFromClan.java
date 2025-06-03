@@ -34,7 +34,7 @@ public class KickFromClan implements CommandExecutor{
             String playerName = args[1];
             Player targetPlayer = Bukkit.getPlayer(playerName);
             if(targetPlayer == null) {
-                player.sendMessage("§cИгрок " + playerName + " не найден");
+                player.sendMessage("§cИгрок §6"+playerName + " §cне найден");
                 return true;
             }
             Optional<Clan> optionalClan = clanManager.getClanByPlayer(player);
@@ -57,9 +57,9 @@ public class KickFromClan implements CommandExecutor{
             }
 
             if(clan.isPlayerInClan(targetClanMember)) {
-                clanManager.removeClanMemberFromClan(playerName, player);
-                player.sendMessage("§aИгрок " + playerName + " успешно кикнут из клана"+clan.getTitle());
-                targetPlayer.sendMessage("§aВы были кикнуты из клана "+clan.getTitle());
+                clanManager.removeClanMemberFromClan(clan.getId(), targetPlayer);
+                player.sendMessage("§aИгрок §6"+playerName + " §aуспешно кикнут из клана §6"+clan.getTitle());
+                targetPlayer.sendMessage("§aВы были кикнуты из клана §6"+clan.getTitle());
                 return true;
             }
             player.sendMessage("§cУказанный игрок не состоит в клане");

@@ -39,17 +39,17 @@ public class HomeClan implements CommandExecutor {
             Optional<Clan> optionalClan = clanManager.getClanByPlayer(player);
 
             if(!optionalClan.isPresent()) {
-                player.sendMessage("Вы не состоите в клане, чтобы использовать команду /clan home");
+                player.sendMessage("§cВы не состоите в клане, чтобы использовать команду §6/clan home");
                 return true;
             }
             Clan clan = optionalClan.get();
 
             if(clan.getClanHome() == null) {
-                player.sendMessage("Вы не установили точку респавна клана, чтобы использовать команду /clan home");
+                player.sendMessage("§cВы не установили точку респавна клана, чтобы использовать команду §6/clan home");
                 return true;
             }
             if(user.hasTakenDamage(delayTeleportCauseCombat)) {
-                player.sendMessage("Вы не можете использовать команду /clan home, пока вы находитесь в бою");
+                player.sendMessage("§cВы не можете использовать команду §6/clan home, пока вы находитесь в бою");
                 return true;
             }
 

@@ -22,13 +22,14 @@ public class HomeSetClan implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        
         if(sender instanceof Player) {
             Player player = (Player) sender;
             
             Optional<Clan> optionalClan = clanManager.getClanByPlayer(player);
 
             if(!optionalClan.isPresent()) {
-                player.sendMessage("Вы не состоите в клане, чтобы устанавливать точку респавна клана");
+                player.sendMessage("§cВы не состоите в клане, чтобы устанавливать точку респавна клана");
                 return true;
             }
             Clan clan = optionalClan.get();
@@ -36,7 +37,7 @@ public class HomeSetClan implements CommandExecutor {
             Location location = player.getLocation();
 
             clan.setClanHome(location);
-            player.sendMessage("Вы успешно установили точку респавна клана");
+            player.sendMessage("§aВы успешно установили точку респавна клана");
         }
 
         return false;

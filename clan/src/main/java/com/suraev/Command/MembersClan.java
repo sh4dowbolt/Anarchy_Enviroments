@@ -28,7 +28,7 @@ public class MembersClan implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player player) {
             if(args.length != 1) {
-                player.sendMessage("§cИспользование: §6/clan members <name>");
+                player.sendMessage("§cИспользование: §6/clan members");
                 return true;
             }
             

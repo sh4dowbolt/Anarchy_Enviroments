@@ -32,21 +32,26 @@ public class RemoveClan implements CommandExecutor {
                 return true;
             }
             if(args[0].equalsIgnoreCase("remove")) {
-                Long clanId = Long.parseLong(args[1]);
-                if(clanManager.getClanById(clanId).isEmpty()) {
-                    player.sendMessage("§cКлан с таким именем не найден");
+                try {
+                    Long clanId = Long.parseLong(args[1]);
+                    if(clanManager.getClanById(clanId).isEmpty()) {
+                        player.sendMessage("§cКлан с таким именем не найден");
+                    return true;
+                    }
+                    removeClanById(clanId);
+                    player.sendMessage("§aКлан успешно удален");
+                    return true;              
+                } catch (NumberFormatException e) {
+                    player.sendMessage("§cУкажите ID клана");
                     return true;
                 }
-                clanManager.removeClanById(clanId);
-                player.sendMessage("§aКлан успешно удален");
-                return true;              
             }
         }   
         sender.sendMessage("§cКоманда доступна только для игроков");
         return true;
     }   
 
-    public boolean removeClan(Player player) {
-        return clanManager.removeClan(player);
+    public boolean removeClanById(Long clanId) {
+        return clanManager.removeClanById(clanId);
     }
 }
